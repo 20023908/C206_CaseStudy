@@ -14,8 +14,6 @@ public class C206_CaseStudy {
 		//4-qid-bid
 		//5-gy-deal
 		
-		////////test test test
-		//123
 
 	}
 
