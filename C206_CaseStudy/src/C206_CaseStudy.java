@@ -5,7 +5,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ArrayList<item> itemlist = new ArrayList<item>();
+		ArrayList<item> accountlist = new ArrayList<item>();
 		
 		//1-dan-useraccount
 		//2-jh-category
