@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
-	ArrayList<bidLibrary> bidList = new ArrayList<bidLibrary>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -11,6 +10,8 @@ public class C206_CaseStudy {
 		//3-nelly-item
 		//hello i was here
 		//4-qid-bid
+		
+		//add bid
 		//5-gy-deal
 		
 		////////test test test
