@@ -6,6 +6,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		
 		ArrayList<item> accountlist = new ArrayList<item>();
+		ArrayList<bidLibrary> bidList = new ArrayList<bidLibrary>();
 		
 		//1-dan-useraccount
 		//2-jh-category
@@ -13,7 +14,6 @@ public class C206_CaseStudy {
 		//hello i was here
 		//4-qid-bid
 		
-		//add bid
 		//5-gy-deal
 		
 
