@@ -101,6 +101,7 @@ public class COAS {
 		System.out.println("3. Add item");
 		System.out.println("4. Add bid");
 		System.out.println("5. Add deal");
+		// more menus
 	}
 
 }
