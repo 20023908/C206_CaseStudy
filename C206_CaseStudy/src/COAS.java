@@ -172,6 +172,7 @@ public class COAS {
 		String password = Helper.readString("Enter password > ");
 		
 		accountList.add(new account(user,role,email,password));
+		// test
 	}
 	
 }
