@@ -16,7 +16,7 @@ public class COAS {
 				COAS.setHeader("ADD");
 				COAS.menuType();
 				
-				int type = Helper.readInt("Enter option to select item type > ");
+				int type = Helper.readInt("Enter option to select menu type > ");
 				
 				
 			} else if (option == 2){
