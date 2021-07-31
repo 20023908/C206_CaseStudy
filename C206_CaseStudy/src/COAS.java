@@ -17,10 +17,6 @@ public class COAS {
 				
 			} else if (option == 4) {
 				System.out.println("Thank for using the application!");
-<<<<<<< HEAD
-				
-=======
->>>>>>> branch 'master' of https://github.com/20006832-Nurul-Aqidah/C206_CaseStudy.git
 			} else {
 				System.out.println("Invalid Option!");
 			}
