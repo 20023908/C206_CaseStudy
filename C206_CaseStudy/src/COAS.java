@@ -69,7 +69,7 @@ public class COAS {
 		//4-qid-bid
 		
 		
-		
+		// testing123
 		
 		
 		
@@ -85,9 +85,6 @@ public class COAS {
 		Helper.line(80, "-");
 	}
 	
-<<<<<<< HEAD
-
-=======
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
 		System.out.println(header);
@@ -100,6 +97,5 @@ public class COAS {
 		System.out.println("3. Item");
 		System.out.println("4. Bid");
 		System.out.println("5. Deal");
-	}
->>>>>>> branch 'master' of https://github.com/20006832-Nurul-Aqidah/C206_CaseStudy.git
-}
+	}}
+
