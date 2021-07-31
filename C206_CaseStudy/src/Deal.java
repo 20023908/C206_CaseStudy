@@ -23,5 +23,29 @@ public class Deal {
 		this.price = price;
 		this.closeDate = closeDate;
 	}
+
+	public int getDealID() {
+		return dealID;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public String getSellerEmail() {
+		return sellerEmail;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String getCloseDate() {
+		return closeDate;
+	}
 	
 }
