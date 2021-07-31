@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
+	private ArrayList<Deal> dealList = new ArrayList<Deal>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -168,6 +169,10 @@ public class COAS {
 	
 	// (5) gy deal
 	
+	private void addDeal(ArrayList<Deal> dealList) {
+		
+		
+	}
 	
 	
 	
