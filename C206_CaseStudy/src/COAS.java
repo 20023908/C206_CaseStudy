@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 
 public class COAS {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int option = 0;
-		
 		while (option!=4) {
 			
 			viewMenu();
@@ -99,10 +98,7 @@ public class COAS {
 		
 		
 		//1-dan-useraccount
-		ArrayList<account> accountlist = new ArrayList<account>();
 		//test
-		
-		
 		
 		
 		
