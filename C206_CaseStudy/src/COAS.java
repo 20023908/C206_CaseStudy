@@ -41,6 +41,7 @@ public class COAS {
 					
 				} else if (type == 5) {
 					//gy add method
+					addDeals(dealList);
 					
 				} else {
 					System.out.println("Invalid type");
@@ -48,14 +49,13 @@ public class COAS {
 				
 			} else if (option == 2){
 				
-				COAS.setHeader("VIEW");
+				COAS.setHeader("VIEW ALL");
 				COAS.menuType();
 				
 				int type = Helper.readInt("Enter option to select menu type > ");
 				
 				if (type == 1) {
 					//dan view method
-					view();
 					
 				} else if (type == 2) {
 					//jh view method
@@ -68,6 +68,7 @@ public class COAS {
 					
 				} else if (type == 5) {
 					//gy view method
+					showAllDeals(dealList);
 					
 				} else {
 					System.out.println("Invalid type");
@@ -150,13 +151,13 @@ public class COAS {
 		System.out.println("2. VIEW");
 		System.out.println("3. DELETE");
 		System.out.println("4. QUIT");
-		Helper.line(80, "-");
+		Helper.line(120, "-");
 	}
 	
 	public static void setHeader(String header) {
-		Helper.line(80, "-");
+		Helper.line(120, "-");
 		System.out.println(header);
-		Helper.line(80, "-");
+		Helper.line(120, "-");
 	}
 	
 	public static void menuType() {
@@ -169,9 +170,9 @@ public class COAS {
 	
 	// (1) dan user 
 	public static void addUser(ArrayList<account> accountList) {
-		Helper.line(35, "-");
+		Helper.line(120, "-");
 		System.out.println("Add user account");
-		Helper.line(35, "-");
+		Helper.line(120, "-");
 		
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
@@ -182,9 +183,6 @@ public class COAS {
 		
 	}
 	
-	private void view() {
-		accountList);
-	}
 	
 	
 	
@@ -216,14 +214,40 @@ public class COAS {
 	
 	// (5) gy deal
 	
-	private void addDeal(ArrayList<Deal> dealList) {
+	private void addDeals(ArrayList<Deal> dealList) {
+		Helper.line(120, "-");
+		System.out.println("Add new deal");
+		Helper.line(120, "-");
 		
+		int dealID = Helper.readInt("Enter deal ID > ");
+		String itemName = Helper.readString("Enter item name > ");
+		String sellerEmail = Helper.readString("Enter seller's email > ");
+		String buyerEmail = Helper.readString("Enter buyer's email > ");
+		double price = Helper.readDouble("Enter transaction price > ");
+		String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > ");
 		
+		if (itemName.isEmpty() || sellerEmail.isEmpty() || buyerEmail.isEmpty() || closeDate.isEmpty()) {
+			System.out.println("Please fill in all the required fields!");
+		}
+		else {
+			Deal deal1 = new Deal(dealID, itemName, sellerEmail, buyerEmail, price, closeDate);
+			dealList.add(deal1);
+			System.out.println("Successfully added a new deal!");
+		}
 	}
 	
-	
-	
-	
+	private void showAllDeals(ArrayList<Deal> dealList) {
+		Helper.line(120, "-");
+		System.out.println("Show All Deals");
+		Helper.line(120, "-");
+		
+		System.out.println(String.format("%-10s %-15s %-25s %-25s %-9s %11s", 
+				"DEAL ID", "ITEM NAME", "SELLER EMAIL", "BUYER EMAIL", "PRICE", "CLOSE DATE"));
+		
+		for (Deal d : dealList) {
+			d.displayInfo();
+		}
+	}
 	
 	
 }

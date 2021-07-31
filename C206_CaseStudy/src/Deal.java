@@ -48,4 +48,9 @@ public class Deal {
 		return closeDate;
 	}
 
+	public void displayInfo() {
+		System.out.println(String.format("%-10d %-15s %-25s %-25s %-9.2f %11s", 
+				getDealID(), getItemName(), getSellerEmail(), getBuyerEmail(),
+				getPrice(), getCloseDate()));
+	}
 }
