@@ -71,5 +71,36 @@ public class COAS {
 		System.out.println("4. QUIT");
 		Helper.line(35, "-");
 	}
+	
+	public static void viewMenu1() {
+		Helper.line(35, "-");
+		System.out.println("ADD");
+		Helper.line(35, "-");
+		System.out.println("1. Add user account");
+		System.out.println("2. Add category");
+		System.out.println("3. Add item");
+		System.out.println("4. Add bid");
+		System.out.println("5. Add deal");
+	}
+	public static void viewMenu2() {
+		Helper.line(35, "-");
+		System.out.println("VIEW ALL");
+		Helper.line(35, "-");
+		System.out.println("1. View all users");
+		System.out.println("2. Add all categories");
+		System.out.println("3. Add all items");
+		System.out.println("4. Show all bids");
+		System.out.println("5. Show all deals");
+	}
+	public static void viewMenu3() {
+		Helper.line(35, "-");
+		System.out.println("ADD");
+		Helper.line(35, "-");
+		System.out.println("1. Add user account");
+		System.out.println("2. Add category");
+		System.out.println("3. Add item");
+		System.out.println("4. Add bid");
+		System.out.println("5. Add deal");
+	}
 
 }
