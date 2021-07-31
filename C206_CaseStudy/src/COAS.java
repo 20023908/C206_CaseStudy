@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class COAS {
 
-
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
 
@@ -29,6 +28,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan add method
+					addUser();
 					
 				} else if (type == 2) {
 					//jh add method
@@ -48,14 +48,14 @@ public class COAS {
 				
 			} else if (option == 2){
 				
-				COAS.setHeader("VIEW");
+				COAS.setHeader("VIEW ALL");
 				COAS.menuType();
 				
 				int type = Helper.readInt("Enter option to select menu type > ");
 				
 				if (type == 1) {
 					//dan view method
-					view();
+					viewAllUser();
 					
 				} else if (type == 2) {
 					//jh view method
@@ -168,22 +168,50 @@ public class COAS {
 	}
 	
 	// (1) dan user 
-	public static void addUser(ArrayList<account> accountList) {
-		Helper.line(35, "-");
+	public void addUser() {
+		Helper.line(80, "-");
 		System.out.println("Add user account");
-		Helper.line(35, "-");
+		Helper.line(80, "-");
 		
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
 		String email = Helper.readString("Enter email > ");
 		String password = Helper.readString("Enter password > ");
 		
-		accountList.add(new account(user,role,email,password));
+		for (account i : accountList) {
+			
+			System.out.println("Test");
+			if (i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println(role + "account with email: " + email + " already exist!");
+				break;
+			}
+			else {
+				if (password.length() < 8) {
+					System.out.println("Password must be more than 8 characters long!");
+					break;
+				}
+				else {
+					accountList.add(new account(user,role,email,password));
+					System.out.println(role + " account added!");
+					break;
+				}
+				
+			}
+		}
+		
 		
 	}
 	
-	private void view() {
-		accountList);
+	public void viewAllUser() {
+		Helper.line(80, "-");
+		System.out.println("View all users");
+		Helper.line(80, "-");
+		String outputUser = "";
+		
+		for (account p : accountList) {
+			outputUser += String.format("Name: %s\nRole: %s\nEmail: %s", p.getName(),p.getRole(),p.getEmail());
+		}
+		System.out.println(outputUser);
 	}
 	
 	
