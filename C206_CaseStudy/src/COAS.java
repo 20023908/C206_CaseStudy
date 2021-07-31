@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class COAS {
-
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
@@ -14,6 +15,12 @@ public class COAS {
 	}
 	
 	private void start() {
+		
+		account buyer1 = new account("Justin", "Buyer", "Justin@yahoo.com", "testing123");
+		account seller1 = new account("Jasmine", "Seller", "Jasmine@yahoo.com", "testing321");
+		
+		accountList.addAll(Arrays.asList(buyer1,seller1));
+		
 		int option = 0;
 		while (option!=4) {
 			
@@ -29,6 +36,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan add method
+					addUser();
 					
 				} else if (type == 2) {
 					//jh add method
@@ -56,6 +64,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan view method
+					viewAllUser();
 					
 				} else if (type == 2) {
 					//jh view method
@@ -83,6 +92,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan delete method
+					deleteUser();
 					
 				} else if (type == 2) {
 					//jh delete method
@@ -106,41 +116,6 @@ public class COAS {
 				System.out.println("Invalid Option!");
 			}
 		}
-		
-		
-		//1-dan-useraccount
-		//test
-		
-		
-		
-		
-		//2-jh-category
-		
-		
-		
-		
-		
-		
-		//3-nelly-item
-		
-		
-		
-		
-		
-		//hello i was here
-		
-		
-		
-		
-		
-		//4-qid-bid
-		
-		
-		
-		
-		
-		
-		//5-gy-deal
 		
 	}
 		
@@ -169,20 +144,77 @@ public class COAS {
 	}
 	
 	// (1) dan user 
-	public static void addUser(ArrayList<account> accountList) {
+
+	public void addUser() {
 		Helper.line(120, "-");
 		System.out.println("Add user account");
 		Helper.line(120, "-");
-		
+
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
 		String email = Helper.readString("Enter email > ");
 		String password = Helper.readString("Enter password > ");
 		
-		accountList.add(new account(user,role,email,password));
+		for (account i : accountList) {
+			if (i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println(role + "account with email: " + email + " already exist!");
+				break;
+			}
+			else {
+				if (password.length() < 8) {
+					System.out.println("Password must be more than 8 characters long!");
+					break;
+				}
+				else {
+					accountList.add(new account(user,role,email,password));
+					System.out.println(role + " account added!");
+					break;
+				}
+				
+			}
+		}
+		
 		
 	}
 	
+	public void viewAllUser() {
+		Helper.line(120, "-");
+		System.out.println("View all users");
+		Helper.line(120, "-");
+		String outputUser = String.format("%-10s %-10s %s\n", "Name", "Role", "Email");
+		
+		for (account p : accountList) {
+			
+			if (p.getRole().equalsIgnoreCase("buyer"))
+				outputUser += String.format("%-10s %-10s %s\n", p.getName(),p.getRole(),p.getEmail());
+			else if (p.getRole().equalsIgnoreCase("seller"))
+				outputUser += String.format("%-10s %-10s %s\n", p.getName(),p.getRole(),p.getEmail());
+
+		}
+		
+		System.out.println(outputUser);
+	}
+	
+	public void deleteUser() {
+		Helper.line(120, "-");
+		System.out.println("Delete buyer/seller account");
+		Helper.line(120, "-");
+		String email = Helper.readString("Enter email to delete > ");
+		
+		for (account i : accountList) {
+			if (!i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println("Account with email: " + email + " does not exist!");
+				break;				
+			} else if (i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println(i.getRole() + " account with email: " + email + " deleted successfully!");
+				accountList.remove(i);
+				break;
+			} else {
+				System.out.println("Account with email: " + email + " not deleted successfully!");
+				break;
+			}
+		}
+	}
 	
 	
 	
