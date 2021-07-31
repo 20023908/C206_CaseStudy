@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-import refactor.Helper;
 
 public class COAS {
 
@@ -17,17 +16,77 @@ public class COAS {
 				COAS.menuType();
 				
 				int type = Helper.readInt("Enter option to select menu type > ");
-				//test
+				
+				if (type == 1) {
+					//dan add method
+					
+				} else if (type == 2) {
+					//jh add method
+					
+				} else if (type == 3) {
+					//nelly add method
+					
+				} else if (type == 4) {
+					//qid add method
+					
+				} else if (type == 5) {
+					//gy add method
+					
+				} else {
+					System.out.println("Invalid type");
+				}
 				
 			} else if (option == 2){
 				
 				COAS.setHeader("VIEW");
 				COAS.menuType();
 				
+				int type = Helper.readInt("Enter option to select menu type > ");
+				
+				if (type == 1) {
+					//dan view method
+					
+				} else if (type == 2) {
+					//jh view method
+					
+				} else if (type == 3) {
+					//nelly view method
+					
+				} else if (type == 4) {
+					//qid view method
+					
+				} else if (type == 5) {
+					//gy view method
+					
+				} else {
+					System.out.println("Invalid type");
+				}
+				
 			} else if (option == 3) {
 				
 				COAS.setHeader("DELETE");
 				COAS.menuType();
+				
+				int type = Helper.readInt("Enter option to select menu type > ");
+				
+				if (type == 1) {
+					//dan delete method
+					
+				} else if (type == 2) {
+					//jh delete method
+					
+				} else if (type == 3) {
+					//nelly delete method
+					
+				} else if (type == 4) {
+					//qid delete method
+					
+				} else if (type == 5) {
+					//gy delete method
+					
+				} else {
+					System.out.println("Invalid type");
+				}
 				
 			} else if (option == 4) {
 				System.out.println("Thank for using the application!");
