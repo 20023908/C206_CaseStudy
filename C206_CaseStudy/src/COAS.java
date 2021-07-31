@@ -1,15 +1,13 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class COAS {
-	
-	 ArrayList<account> accountList = new ArrayList<account>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int option = 0;
+		
 		while (option!=4) {
+			
 			viewMenu();
 			option = Helper.readInt("Enter option > ");
 			
@@ -48,7 +46,6 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan view method
-					
 					
 				} else if (type == 2) {
 					//jh view method
@@ -102,6 +99,8 @@ public class COAS {
 		
 		
 		//1-dan-useraccount
+		ArrayList<account> accountlist = new ArrayList<account>();
+		//test
 		
 		
 		
@@ -131,11 +130,12 @@ public class COAS {
 		//4-qid-bid
 		
 		
-		// testing123
+		
 		
 		
 		
 		//5-gy-deal
+		
 	}
 	
 	public static void viewMenu() {
@@ -176,4 +176,4 @@ public class COAS {
 	}
 	
 }
-
+	
