@@ -201,18 +201,18 @@ public class COAS {
 		Helper.line(120, "-");
 		String email = Helper.readString("Enter email to delete > ");
 		
+		boolean isDeleted = false;
+		
 		for (account i : accountList) {
-			if (!i.getEmail().equalsIgnoreCase(email)) {
-				System.out.println("Account with email: " + email + " does not exist!");
-				break;				
-			} else if (i.getEmail().equalsIgnoreCase(email)) {
-				System.out.println(i.getRole() + " account with email: " + email + " deleted successfully!");
+			if (i.getEmail().equalsIgnoreCase(email)) {
 				accountList.remove(i);
-				break;
-			} else {
-				System.out.println("Account with email: " + email + " not deleted successfully!");
+				isDeleted = true;
+				System.out.println(i.getRole() + " account with email: " + email + " deleted successfully!");
 				break;
 			}
+		}
+		if (isDeleted == false) {
+			System.out.println("Account with email: " + email + " does not exist!");
 		}
 	}
 	
