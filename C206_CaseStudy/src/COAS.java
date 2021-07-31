@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class COAS {
 
@@ -13,6 +15,12 @@ public class COAS {
 	}
 	
 	private void start() {
+		
+		account buyer1 = new account("Justin", "Buyer", "Justin@yahoo.com", "testing123");
+		account seller1 = new account("Jasmine", "Seller", "Jasmine@yahoo.com", "testing321");
+		
+		accountList.addAll(Arrays.asList(buyer1,seller1));
+		
 		int option = 0;
 		while (option!=4) {
 			
@@ -82,6 +90,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan delete method
+					deleteUser();
 					
 				} else if (type == 2) {
 					//jh delete method
@@ -179,8 +188,6 @@ public class COAS {
 		String password = Helper.readString("Enter password > ");
 		
 		for (account i : accountList) {
-			
-			System.out.println("Test");
 			if (i.getEmail().equalsIgnoreCase(email)) {
 				System.out.println(role + "account with email: " + email + " already exist!");
 				break;
@@ -206,12 +213,38 @@ public class COAS {
 		Helper.line(80, "-");
 		System.out.println("View all users");
 		Helper.line(80, "-");
-		String outputUser = "";
+		String outputUser = String.format("%-10s %-10s %s\n", "Name", "Role", "Email");
 		
 		for (account p : accountList) {
-			outputUser += String.format("Name: %s\nRole: %s\nEmail: %s", p.getName(),p.getRole(),p.getEmail());
+			
+			if (p.getRole().equalsIgnoreCase("buyer"))
+				outputUser += String.format("%-10s %-10s %s\n", p.getName(),p.getRole(),p.getEmail());
+			else if (p.getRole().equalsIgnoreCase("seller"))
+				outputUser += String.format("%-10s %-10s %s\n", p.getName(),p.getRole(),p.getEmail());
+
 		}
+		
 		System.out.println(outputUser);
+	}
+	
+	public void deleteUser() {
+		Helper.line(80, "-");
+		System.out.println("Delete buyer/seller account");
+		Helper.line(80, "-");
+		String email = Helper.readString("Enter email to delete > ");
+		
+		for (account i : accountList) {
+			if (!i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println("Account with email: " + email + " does not exist!");
+				break;				
+			} else if (i.getEmail().equalsIgnoreCase(email)) {
+				System.out.println(i.getRole() + " account with email: " + email + " deleted successfully!");
+				accountList.remove(i);
+				break;
+			} else {
+				System.out.println("Account with email: " + email + " not deleted successfully!");
+			}
+		}
 	}
 	
 	
