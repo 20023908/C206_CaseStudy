@@ -17,7 +17,7 @@ public class COAS {
 				
 			} else if (option == 4) {
 				System.out.println("Thank for using the application!");
-				option = 4;
+
 			} else {
 				System.out.println("Invalid Option!");
 			}
