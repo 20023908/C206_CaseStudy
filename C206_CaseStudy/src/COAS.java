@@ -17,7 +17,7 @@ public class COAS {
 				COAS.menuType();
 				
 				int type = Helper.readInt("Enter option to select menu type > ");
-				
+				//test
 				
 			} else if (option == 2){
 				
