@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import refactor.Helper;
+
 public class COAS {
 
 	public static void main(String[] args) {
@@ -11,9 +13,21 @@ public class COAS {
 			
 			if (option == 1) {
 				
+				COAS.setHeader("ADD");
+				COAS.menuType();
+				
+				int type = Helper.readInt("Enter option to select menu type > ");
+				//test
+				
 			} else if (option == 2){
 				
+				COAS.setHeader("VIEW");
+				COAS.menuType();
+				
 			} else if (option == 3) {
+				
+				COAS.setHeader("DELETE");
+				COAS.menuType();
 				
 			} else if (option == 4) {
 				System.out.println("Thank for using the application!");
@@ -21,6 +35,7 @@ public class COAS {
 				System.out.println("Invalid Option!");
 			}
 		}
+		
 		
 		
 		//1-dan-useraccount
@@ -62,15 +77,29 @@ public class COAS {
 	}
 	
 	public static void viewMenu() {
-		Helper.line(35, "-");
-		System.out.println("CAMPUS Online Auction Shop (COAS)");
-		Helper.line(35, "-");
+		COAS.setHeader("CAMPUS Online Auction Shop (COAS)");
 		System.out.println("1. ADD");
 		System.out.println("2. VIEW");
 		System.out.println("3. DELETE");
 		System.out.println("4. QUIT");
-		Helper.line(35, "-");
+		Helper.line(80, "-");
 	}
 	
+<<<<<<< HEAD
 
+=======
+	public static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+	
+	public static void menuType() {
+		System.out.println("1. User");
+		System.out.println("2. Category");
+		System.out.println("3. Item");
+		System.out.println("4. Bid");
+		System.out.println("5. Deal");
+	}
+>>>>>>> branch 'master' of https://github.com/20006832-Nurul-Aqidah/C206_CaseStudy.git
 }
