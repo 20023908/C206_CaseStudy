@@ -2,13 +2,19 @@ import java.util.ArrayList;
 
 public class COAS {
 
+
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		COAS application = new COAS();
+		application.start();
+	}
+	
+	private void start() {
 		int option = 0;
-		
 		while (option!=4) {
 			
 			viewMenu();
@@ -49,6 +55,7 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan view method
+					view();
 					
 				} else if (type == 2) {
 					//jh view method
@@ -99,7 +106,43 @@ public class COAS {
 			}
 		}
 		
-	} //end of main method
+		
+		//1-dan-useraccount
+		//test
+		
+		
+		
+		
+		//2-jh-category
+		
+		
+		
+		
+		
+		
+		//3-nelly-item
+		
+		
+		
+		
+		
+		//hello i was here
+		
+		
+		
+		
+		
+		//4-qid-bid
+		
+		
+		
+		
+		
+		
+		//5-gy-deal
+		
+	}
+		
 	
 	public static void viewMenu() {
 		COAS.setHeader("CAMPUS Online Auction Shop (COAS)");
@@ -137,6 +180,10 @@ public class COAS {
 		
 		accountList.add(new account(user,role,email,password));
 		
+	}
+	
+	private void view() {
+		accountList);
 	}
 	
 	
