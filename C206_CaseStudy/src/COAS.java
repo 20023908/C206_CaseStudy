@@ -2,11 +2,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import skeletonvibes.Bid;
+import skeletonvibes.COAS;
+import skeletonvibes.Helper;
+import skeletonvibes.item;
+
 public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
 	private ArrayList<Bid> bidList = new ArrayList<Bid>();
+	private static ArrayList<item> itemList = new ArrayList<item>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -250,59 +256,81 @@ public class COAS {
 
 	
 	// (4) qid bid
-	
-	private static int bidCount = 0;
-	
-	public static void addBid(ArrayList<Bid> bidList) {
-		Helper.line(35, "-");
-		System.out.println("Add bid");
-		Helper.line(35, "-");
-		bidCount++;
+	public static Bid inputBid() {
+		COAS.setHeader("Add New Bid");
+		int bidID = Helper.readInt("Enter Bid ID > ");
 		String itemName = Helper.readString("Item to Bid > ");
-		double bidPrice = Helper.readDouble("Amount to Bid > ");
+		double bidAmt = Helper.readDouble("Enter Amount to Bid >$");
 		String buyerEmail = Helper.readString("Enter Buyer's Email > ");
 		String sellerEmail = Helper.readString("Enter Seller's Email > ");
+		Bid bid1 = new Bid(bidID, itemName, bidAmt, buyerEmail, sellerEmail);
+		return bid1;
 		
-		bidList.add(new Bid(bidCount, itemName,bidPrice,buyerEmail,sellerEmail));	
 	}
 	
-	public static void viewBid(ArrayList<Bid> bidList) {
-		Helper.line(35, "-");
-		System.out.println("View bid");
-		Helper.line(35, "-");
-		String output = String.format("%-10s %-10s %-18s %-18s %-18s\n", "BID ID", "ITEM NAME", "BID AMOUNT", "BUYER'S EMAIL", "SELLER'S EMAIL");
-		for (Bid B : bidList) {
-			output += String.format("%-10d %-10s $%-18.2f %-18s %-18s\n", B.getBidID(), B.getItemName(), B.getBidAmt(), B.getBuyerEmail(), B.getSellerEmail());
+	public static void addBid(ArrayList<Bid> bidList, Bid bid1) {
+		String message = "";
+		if (bid1.getItemName().isEmpty() || bid1.getBuyerEmail().isEmpty() ||
+				bid1.getSellerEmail().isEmpty()) {
+			message += "Please fill in all the required fields!\n";
 		}
+		else {
+			for (item I : itemList) {
+				if (bid1.getItemName().toLowerCase().equalsIgnoreCase(I.getItem().toLowerCase())) {
+					double calcBidAmt = I.getMinBidprice() + I.getBidIncrement();
+					if (bid1.getBidAmt() < calcBidAmt) {
+						message += "Bid cannot be lower than the current bidding price!";
+					}
+					else {
+						I.setMinBidprice(calcBidAmt);
+						bidList.add(bid1);
+						message += "Successfully added a new bid!";	
+					}
+				}
+			}
+		}
+		System.out.println(message);
+	}
+	public static String retrieveAllBids(ArrayList<Bid> bidList) {
+		String output = ""; 
+		for (Bid B : bidList) {
+			output += String.format("\n%-10d %-25s %-25.2f %-25s %s", 
+					B.getBidID(), B.getItemName(), B.getBidAmt(), B.getBuyerEmail(), B.getSellerEmail());
+		}
+		return output;
+	}
+	
+	public static void showAllBids(ArrayList<Bid> bidList) {
+		String output = String.format("%-10s %-25s %-25s %-25s %s", "BID ID", "ITEM NAME", "BID AMOUNT", "BUYER'S EMAIL", "SELLER'S EMAIL");
+		output += retrieveAllBids(bidList);
 		System.out.println(output);
 	}
 	
-	public static boolean searchBid(ArrayList<Bid> bidList, int deleteID) {
-		boolean available = false;
+	public static boolean doDeleteBid(ArrayList<Bid> bidList, int deleteID, char cfm) {
+		boolean isDeleted = false;
 		for (int i = 0; i < bidList.size(); i++) {
-			if (deleteID == bidList.get(i).getBidID()) {
+			if (bidList.get(i).getBidID() == (deleteID) && (cfm == 'Y' || cfm == 'y')) {
 				bidList.remove(i);
-				available = true;
+				isDeleted = true;
 			}
 		}
-		return available;
+		return isDeleted;
 	}
 	
 	public static void deleteID(ArrayList<Bid> bidList) {
-		Helper.line(35, "-");
-		System.out.println("Delete bid");
-		Helper.line(35, "-");
+		COAS.setHeader("Delete Bid");
+		COAS.showAllBids(bidList);
 		int deleteID = Helper.readInt("Enter Bid ID to delete > ");
-		boolean available = searchBid(bidList, deleteID);
+		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
+		boolean isDeleted = doDeleteBid(bidList, deleteID, cfm);
 		
-		if (available == false) {
+		if (isDeleted == false) {
 			System.out.println("Invalid Bid ID");
 		}
 		else {
-			System.out.println("Bid ID " + deleteID + " deleted!");
+			System.out.println("Bid ID " + deleteID + " successfully deleted!");
 		}
 	}
-
 	
 	// (5) gy deal
 	
