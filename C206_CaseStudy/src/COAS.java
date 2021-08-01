@@ -6,6 +6,7 @@ public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
+	private ArrayList<Bid> bidList = new ArrayList<Bid>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -53,6 +54,7 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid add method
+					addBid(bidList);
 
 				} else if (type == 5) {
 
@@ -85,6 +87,7 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid view method
+					viewBid(bidList);
 
 				} else if (type == 5) {
 					// gy view method
@@ -114,6 +117,7 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid delete method
+					deleteID(bidList);
 
 				} else if (type == 5) {
 
@@ -246,6 +250,57 @@ public class COAS {
 
 	
 	// (4) qid bid
+	private static int bidCount = 0;
+	
+	public static void addBid(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("Add bid");
+		Helper.line(35, "-");
+		bidCount++;
+		String itemName = Helper.readString("Item to Bid > ");
+		double bidPrice = Helper.readDouble("Amount to Bid > ");
+		String buyerEmail = Helper.readString("Enter Buyer's Email > ");
+		String sellerEmail = Helper.readString("Enter Seller's Email > ");
+		
+		bidList.add(new Bid(bidCount, itemName,bidPrice,buyerEmail,sellerEmail));	
+	}
+	
+	public static void viewBid(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("View bid");
+		Helper.line(35, "-");
+		String output = String.format("%-10s %-10s %-18s %-18s %-18s\n", "BID ID", "ITEM NAME", "BID AMOUNT", "BUYER'S EMAIL", "SELLER'S EMAIL");
+		for (Bid B : bidList) {
+			output += String.format("%-10d %-10s $%-18.2f %-18s %-18s\n", B.getBidID(), B.getItemName(), B.getBidAmt(), B.getBuyerEmail(), B.getSellerEmail());
+		}
+		System.out.println(output);
+	}
+	
+	public static boolean searchBid(ArrayList<Bid> bidList, int deleteID) {
+		boolean available = false;
+		for (int i = 0; i < bidList.size(); i++) {
+			if (deleteID == bidList.get(i).getBidID()) {
+				bidList.remove(i);
+				available = true;
+			}
+		}
+		return available;
+	}
+	
+	public static void deleteID(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("Delete bid");
+		Helper.line(35, "-");
+		int deleteID = Helper.readInt("Enter Bid ID to delete > ");
+		boolean available = searchBid(bidList, deleteID);
+		
+		if (available == false) {
+			System.out.println("Invalid Bid ID");
+		}
+		else {
+			System.out.println("Bid ID " + deleteID + " deleted!");
+		}
+	}
 
 	
 	// (5) gy deal
