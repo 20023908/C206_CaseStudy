@@ -50,6 +50,7 @@ public class COASTest {
 		// Qid
 		
 		
+		
 		// GY
 		deal1 = new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com",
 				1020.50, "08/12/2019");

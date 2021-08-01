@@ -250,6 +250,7 @@ public class COAS {
 
 	
 	// (4) qid bid
+	
 	private static int bidCount = 0;
 	
 	public static void addBid(ArrayList<Bid> bidList) {
@@ -304,7 +305,7 @@ public class COAS {
 
 	
 	// (5) gy deal
-
+	
 	public static Deal inputDeal() {
 		COAS.setHeader("Add New Deal");
 		
