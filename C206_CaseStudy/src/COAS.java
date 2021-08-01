@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import refactor.Camcorder;
+
 public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
@@ -42,7 +44,8 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan add method
-					addUser();
+					account user = inputUser();
+					COAS.addUser(accountList, user);
 					
 				} else if (type == 2) {
 					//jh add method
@@ -55,7 +58,7 @@ public class COAS {
 					
 				} else if (type == 5) {
 					//gy add method
-					addDeals(dealList);
+					addDeal(dealList);
 					
 				} else {
 					System.out.println("Invalid type");
@@ -156,42 +159,14 @@ public class COAS {
 
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
-
-//	public static void addUser() {
-//		Helper.line(120, "-");
-//		System.out.println("Add user account");
-//		Helper.line(120, "-");
-//
-//		String user = Helper.readString("Enter name > ");
-//		String role = Helper.readString("Enter role (Buyer/Seller) > ");
-//		String email = Helper.readString("Enter email > ");
-//		String password = Helper.readString("Enter password > ");
-//		
-//		for (account i : accountList) {
-//			if (i.getEmail().equalsIgnoreCase(email)) {
-//				System.out.println(role + "account with email: " + email + " already exist!");
-//				break;
-//			}
-//			else {
-//				if (password.length() < 8) {
-//					System.out.println("Password must be more than 8 characters long!");
-//					break;
-//				}
-//				else {
-//					accountList.add(new account(user,role,email,password));
-//					System.out.println(role + " account added!");
-//					break;
-//				}
-//				
-//			}
-//		}
-//		
-//		
-//	}
+	}
 	
 	public static account inputUser() {
+
 		String user = Helper.readString("Enter asset tag > ");
 		String role = Helper.readString("Enter description > ");
+		String user = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role (Buyer/Seller) > ");
 		String email = Helper.readString("Enter email > ");
 		String password = Helper.readString("Enter password > ");
 		
@@ -285,8 +260,7 @@ public class COAS {
 	
 	
 	// (5) gy deal
-	
-	private void addDeals(ArrayList<Deal> dealList) {
+	public static Deal inputDeal() {
 		COAS.setHeader("Add New Deal");
 		
 		int dealID = Helper.readInt("Enter deal ID > ");
@@ -301,12 +275,16 @@ public class COAS {
 		}
 		else {
 			Deal deal1 = new Deal(dealID, itemName, sellerEmail, buyerEmail, price, closeDate);
-			dealList.add(deal1);
-			System.out.println("Successfully added a new deal!");
+			return deal1;
 		}
 	}
+	public static void addDeal(ArrayList<Deal> dealList) {
+		
+		dealList.add(deal1);
+		System.out.println("Successfully added a new deal!");
+	}
 	
-	private void showAllDeals(ArrayList<Deal> dealList) {
+	public static void showAllDeals(ArrayList<Deal> dealList) {
 		COAS.setHeader("Show All Deals");
 		
 		System.out.println(String.format("%-10s %-25s %-30s %-30s %-9s %11s", 
@@ -317,7 +295,7 @@ public class COAS {
 		}
 	}
 	
-	private void deleteDeal(ArrayList<Deal> dealList) {
+	public static void deleteDeal(ArrayList<Deal> dealList) {
 		COAS.setHeader("Delete Deal");
 		
 		int delID = Helper.readInt("Enter deal ID you want to delete > ");
