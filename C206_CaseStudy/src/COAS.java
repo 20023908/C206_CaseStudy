@@ -145,37 +145,68 @@ public class COAS {
 	
 	// (1) dan user 
 
-	public void addUser() {
-		Helper.line(120, "-");
-		System.out.println("Add user account");
-		Helper.line(120, "-");
-
-		String user = Helper.readString("Enter name > ");
-		String role = Helper.readString("Enter role (Buyer/Seller) > ");
+//	public static void addUser() {
+//		Helper.line(120, "-");
+//		System.out.println("Add user account");
+//		Helper.line(120, "-");
+//
+//		String user = Helper.readString("Enter name > ");
+//		String role = Helper.readString("Enter role (Buyer/Seller) > ");
+//		String email = Helper.readString("Enter email > ");
+//		String password = Helper.readString("Enter password > ");
+//		
+//		for (account i : accountList) {
+//			if (i.getEmail().equalsIgnoreCase(email)) {
+//				System.out.println(role + "account with email: " + email + " already exist!");
+//				break;
+//			}
+//			else {
+//				if (password.length() < 8) {
+//					System.out.println("Password must be more than 8 characters long!");
+//					break;
+//				}
+//				else {
+//					accountList.add(new account(user,role,email,password));
+//					System.out.println(role + " account added!");
+//					break;
+//				}
+//				
+//			}
+//		}
+//		
+//		
+//	}
+	
+	public static account inputUser() {
+		String user = Helper.readString("Enter asset tag > ");
+		String role = Helper.readString("Enter description > ");
 		String email = Helper.readString("Enter email > ");
 		String password = Helper.readString("Enter password > ");
 		
+		account user1= new account(user, role, email, password);
+		return user1;
+	}
+	
+	public static void addUser(ArrayList<account> accountList, account user1) {
+		
 		for (account i : accountList) {
-			if (i.getEmail().equalsIgnoreCase(email)) {
-				System.out.println(role + "account with email: " + email + " already exist!");
+			if (i.getEmail().equalsIgnoreCase(user1.getEmail())) {
+				System.out.println(user1.getRole() + "account with email: " + user1.getEmail() + " already exist!");
 				break;
 			}
 			else {
-				if (password.length() < 8) {
+				if (user1.getPassword().length() < 8) {
 					System.out.println("Password must be more than 8 characters long!");
 					break;
 				}
 				else {
-					accountList.add(new account(user,role,email,password));
-					System.out.println(role + " account added!");
+					accountList.add(user1);
+					System.out.println(user1.getRole() + " account added");
 					break;
-				}
-				
 			}
 		}
-		
-		
 	}
+}
 	
 	public void viewAllUser() {
 		Helper.line(120, "-");
