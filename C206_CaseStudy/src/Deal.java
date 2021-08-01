@@ -49,7 +49,7 @@ public class Deal {
 	}
 
 	public void displayInfo() {
-		System.out.println(String.format("%-10d %-15s %-25s %-25s %-9.2f %11s", 
+		System.out.println(String.format("%-10d %-25s %-30s %-30s %-9.2f %11s", 
 				getDealID(), getItemName(), getSellerEmail(), getBuyerEmail(),
 				getPrice(), getCloseDate()));
 	}

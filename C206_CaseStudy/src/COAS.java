@@ -6,6 +6,7 @@ public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
+	private ArrayList<Bid> bidList = new ArrayList<Bid>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -17,8 +18,14 @@ public class COAS {
 
 		account buyer1 = new account("Justin", "Buyer", "Justin@yahoo.com", "testing123");
 		account seller1 = new account("Jasmine", "Seller", "Jasmine@yahoo.com", "testing321");
+		
+		accountList.addAll(Arrays.asList(buyer1,seller1));
+		
+		dealList.add(new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com",
+				1020.50, "08/12/2019"));
+		dealList.add(new Deal(69, "Love Service 999", "balmond@gmail.com", "johnson@gmail.com",
+				69.69, "20/05/2019"));
 
-		accountList.addAll(Arrays.asList(buyer1, seller1));
 
 		int option = 0;
 		while (option != 4) {
@@ -36,7 +43,8 @@ public class COAS {
 				if (type == 1) {
 					// dan add method
 					account user = inputUser();
-					COAS.addUser(accountList, user);
+					String email = user.getEmail();
+					COAS.addUser(accountList, user, email);
 
 				} else if (type == 2) {
 					// jh add method
@@ -46,10 +54,14 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid add method
+					addBid(bidList);
 
 				} else if (type == 5) {
-					// gy add method
-					addDeals(dealList);
+
+					//gy add method
+					Deal deal1 = inputDeal();
+					COAS.addDeal(dealList, deal1);
+
 
 				} else {
 					System.out.println("Invalid type");
@@ -75,9 +87,11 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid view method
+					viewBid(bidList);
 
 				} else if (type == 5) {
 					// gy view method
+					COAS.setHeader("Show All Deals");
 					showAllDeals(dealList);
 
 				} else {
@@ -103,9 +117,12 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid delete method
+					deleteID(bidList);
 
 				} else if (type == 5) {
-					// gy delete method
+
+					//gy delete method
+					deleteDeal(dealList);
 
 				} else {
 					System.out.println("Invalid type");
@@ -142,8 +159,8 @@ public class COAS {
 		System.out.println("4. Bid");
 		System.out.println("5. Deal");
 	}
-
-	// (1) dan user
+	
+	// (1) dan user 
 
 	public static account inputUser() {
 		COAS.setHeader("Add User Account");
@@ -157,25 +174,24 @@ public class COAS {
 		return user1;
 	}
 
-	public static void addUser(ArrayList<account> accountList, account user1) {
+	public static void addUser(ArrayList<account> accountList, account user1, String email) {
+		
+		for (account a : accountList) {
+			email = a.getEmail();
+		}
+		if (!user1.getEmail().equalsIgnoreCase(email) && user1.getPassword().length() > 8) {
+			accountList.add(user1);
+			System.out.println(user1.getRole() + " account added");
 
-		for (account i : accountList) {
-			if (i.getEmail().equalsIgnoreCase(user1.getEmail())) {
-				System.out.println(user1.getRole() + "account with email: " + user1.getEmail() + " already exist!");
-				break;
-			} else {
-				if (user1.getPassword().length() < 8) {
-					System.out.println("Password must be more than 8 characters long!");
-					break;
-				} else {
-					accountList.add(user1);
-					System.out.println(user1.getRole() + " account added");
-					break;
-				}
-			}
+		}
+		if (user1.getEmail().equalsIgnoreCase(email)) {
+			System.out.println(user1.getRole() + " account with email: " + user1.getEmail() + " already exist!");
+		}
+		if (user1.getPassword().length() < 8) {
+			System.out.println("Password must be more than 8 characters long!");
 		}
 	}
-
+	
 	public static String retrieveUser(ArrayList<account> accountList) {
 		String outputUser = "";
 
@@ -229,44 +245,143 @@ public class COAS {
 
 	// (2) jh category
 
+	
 	// (3) nelly item
 
+	
 	// (4) qid bid
+	
+	private static int bidCount = 0;
+	
+	public static void addBid(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("Add bid");
+		Helper.line(35, "-");
+		bidCount++;
+		String itemName = Helper.readString("Item to Bid > ");
+		double bidPrice = Helper.readDouble("Amount to Bid > ");
+		String buyerEmail = Helper.readString("Enter Buyer's Email > ");
+		String sellerEmail = Helper.readString("Enter Seller's Email > ");
+		
+		bidList.add(new Bid(bidCount, itemName,bidPrice,buyerEmail,sellerEmail));	
+	}
+	
+	public static void viewBid(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("View bid");
+		Helper.line(35, "-");
+		String output = String.format("%-10s %-10s %-18s %-18s %-18s\n", "BID ID", "ITEM NAME", "BID AMOUNT", "BUYER'S EMAIL", "SELLER'S EMAIL");
+		for (Bid B : bidList) {
+			output += String.format("%-10d %-10s $%-18.2f %-18s %-18s\n", B.getBidID(), B.getItemName(), B.getBidAmt(), B.getBuyerEmail(), B.getSellerEmail());
+		}
+		System.out.println(output);
+	}
+	
+	public static boolean searchBid(ArrayList<Bid> bidList, int deleteID) {
+		boolean available = false;
+		for (int i = 0; i < bidList.size(); i++) {
+			if (deleteID == bidList.get(i).getBidID()) {
+				bidList.remove(i);
+				available = true;
+			}
+		}
+		return available;
+	}
+	
+	public static void deleteID(ArrayList<Bid> bidList) {
+		Helper.line(35, "-");
+		System.out.println("Delete bid");
+		Helper.line(35, "-");
+		int deleteID = Helper.readInt("Enter Bid ID to delete > ");
+		boolean available = searchBid(bidList, deleteID);
+		
+		if (available == false) {
+			System.out.println("Invalid Bid ID");
+		}
+		else {
+			System.out.println("Bid ID " + deleteID + " deleted!");
+		}
+	}
 
+	
 	// (5) gy deal
-
-	private void addDeals(ArrayList<Deal> dealList) {
-		Helper.line(120, "-");
-		System.out.println("Add new deal");
-		Helper.line(120, "-");
-
+	
+	public static Deal inputDeal() {
+		COAS.setHeader("Add New Deal");
+		
 		int dealID = Helper.readInt("Enter deal ID > ");
 		String itemName = Helper.readString("Enter item name > ");
 		String sellerEmail = Helper.readString("Enter seller's email > ");
 		String buyerEmail = Helper.readString("Enter buyer's email > ");
 		double price = Helper.readDouble("Enter transaction price > ");
 		String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > ");
+		
+		Deal deal1 = new Deal(dealID, itemName, sellerEmail, buyerEmail, price, closeDate);
+		return deal1;
+		
+	}
 
-		if (itemName.isEmpty() || sellerEmail.isEmpty() || buyerEmail.isEmpty() || closeDate.isEmpty()) {
+	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
+		
+		if (deal1.getItemName().isEmpty() || deal1.getSellerEmail().isEmpty() 
+				|| deal1.getBuyerEmail().isEmpty() || deal1.getCloseDate().isEmpty()) {
 			System.out.println("Please fill in all the required fields!");
-		} else {
-			Deal deal1 = new Deal(dealID, itemName, sellerEmail, buyerEmail, price, closeDate);
+		}
+		else {
 			dealList.add(deal1);
 			System.out.println("Successfully added a new deal!");
 		}
+		
 	}
-
-	private void showAllDeals(ArrayList<Deal> dealList) {
-		Helper.line(120, "-");
-		System.out.println("Show All Deals");
-		Helper.line(120, "-");
-
-		System.out.println(String.format("%-10s %-15s %-25s %-25s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
-				"BUYER EMAIL", "PRICE", "CLOSE DATE"));
+	
+	public static String retrieveAllDeals(ArrayList<Deal> dealList) {
+		String output = "";
 
 		for (Deal d : dealList) {
-			d.displayInfo();
+
+			output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", 
+					d.getDealID(), d.getItemName(), d.getSellerEmail(), d.getBuyerEmail(),
+					d.getPrice(), d.getCloseDate());
 		}
+		return output;
+	}
+	
+	public static void showAllDeals(ArrayList<Deal> dealList) {
+		
+		String output = String.format("%-10s %-25s %-30s %-30s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
+				"BUYER EMAIL", "PRICE", "CLOSE DATE");
+		output += retrieveAllDeals(dealList);
+		System.out.println(output);
+	
+	}
+	
+	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int dealID, char cfm) {
+
+		boolean isDeleted = false;
+
+		for (Deal d : dealList) {
+			if (dealID == d.getDealID() && (cfm == 'Y' || cfm == 'y')) {
+				dealList.remove(d);
+				isDeleted = true;
+				break;
+			}
+		}
+	
+		return isDeleted;
 	}
 
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+		COAS.setHeader("Delete Deal");
+		COAS.showAllDeals(dealList);
+		int dealID = Helper.readInt("Enter deal ID you want to delete > ");
+		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");	
+		boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
+		
+		if (isDeleted == false) {
+			System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
+		}
+		else {
+			System.out.println("Deal ID "+ dealID + " successfully deleted!");
+		}
+	}
 }
