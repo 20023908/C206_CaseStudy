@@ -36,9 +36,6 @@ public class account {
 		return password;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public void viewDetails() {
 		System.out.println("Name: " + name);
