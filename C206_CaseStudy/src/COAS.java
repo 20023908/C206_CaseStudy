@@ -36,7 +36,8 @@ public class COAS {
 				
 				if (type == 1) {
 					//dan add method
-					addUser();
+					account user = inputUser();
+					COAS.addUser(accountList, user);
 					
 				} else if (type == 2) {
 					//jh add method
@@ -144,42 +145,10 @@ public class COAS {
 	}
 	
 	// (1) dan user 
-
-//	public static void addUser() {
-//		Helper.line(120, "-");
-//		System.out.println("Add user account");
-//		Helper.line(120, "-");
-//
-//		String user = Helper.readString("Enter name > ");
-//		String role = Helper.readString("Enter role (Buyer/Seller) > ");
-//		String email = Helper.readString("Enter email > ");
-//		String password = Helper.readString("Enter password > ");
-//		
-//		for (account i : accountList) {
-//			if (i.getEmail().equalsIgnoreCase(email)) {
-//				System.out.println(role + "account with email: " + email + " already exist!");
-//				break;
-//			}
-//			else {
-//				if (password.length() < 8) {
-//					System.out.println("Password must be more than 8 characters long!");
-//					break;
-//				}
-//				else {
-//					accountList.add(new account(user,role,email,password));
-//					System.out.println(role + " account added!");
-//					break;
-//				}
-//				
-//			}
-//		}
-//		
-//		
-//	}
 	
 	public static account inputUser() {
-		String user = Helper.readString("Enter asset tag > ");
-		String role = Helper.readString("Enter description > ");
+		String user = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role (Buyer/Seller) > ");
 		String email = Helper.readString("Enter email > ");
 		String password = Helper.readString("Enter password > ");
 		
