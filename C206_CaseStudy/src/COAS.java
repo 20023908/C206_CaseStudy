@@ -21,6 +21,12 @@ public class COAS {
 		
 		accountList.addAll(Arrays.asList(buyer1,seller1));
 		
+		dealList.add(new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com",
+				1020.50, "08/12/2019"));
+		dealList.add(new Deal(69, "Love Service 999", "balmond@gmail.com", "johnson@gmail.com",
+				69.69, "20/05/2019"));
+		
+		
 		int option = 0;
 		while (option!=4) {
 			
@@ -105,7 +111,7 @@ public class COAS {
 					
 				} else if (type == 5) {
 					//gy delete method
-					
+					deleteDeal(dealList);
 				} else {
 					System.out.println("Invalid type");
 				}
@@ -146,9 +152,7 @@ public class COAS {
 	// (1) dan user 
 
 	public void addUser() {
-		Helper.line(120, "-");
-		System.out.println("Add user account");
-		Helper.line(120, "-");
+		COAS.setHeader("Add User Account");
 
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
@@ -178,9 +182,8 @@ public class COAS {
 	}
 	
 	public void viewAllUser() {
-		Helper.line(120, "-");
-		System.out.println("View all users");
-		Helper.line(120, "-");
+		COAS.setHeader("View All Users");
+		
 		String outputUser = String.format("%-10s %-10s %s\n", "Name", "Role", "Email");
 		
 		for (account p : accountList) {
@@ -196,9 +199,8 @@ public class COAS {
 	}
 	
 	public void deleteUser() {
-		Helper.line(120, "-");
-		System.out.println("Delete buyer/seller account");
-		Helper.line(120, "-");
+		COAS.setHeader("Delete Buyer/Seller Account");
+		
 		String email = Helper.readString("Enter email to delete > ");
 		
 		boolean isDeleted = false;
@@ -246,9 +248,7 @@ public class COAS {
 	// (5) gy deal
 	
 	private void addDeals(ArrayList<Deal> dealList) {
-		Helper.line(120, "-");
-		System.out.println("Add new deal");
-		Helper.line(120, "-");
+		COAS.setHeader("Add New Deal");
 		
 		int dealID = Helper.readInt("Enter deal ID > ");
 		String itemName = Helper.readString("Enter item name > ");
@@ -268,11 +268,9 @@ public class COAS {
 	}
 	
 	private void showAllDeals(ArrayList<Deal> dealList) {
-		Helper.line(120, "-");
-		System.out.println("Show All Deals");
-		Helper.line(120, "-");
+		COAS.setHeader("Show All Deals");
 		
-		System.out.println(String.format("%-10s %-15s %-25s %-25s %-9s %11s", 
+		System.out.println(String.format("%-10s %-25s %-30s %-30s %-9s %11s", 
 				"DEAL ID", "ITEM NAME", "SELLER EMAIL", "BUYER EMAIL", "PRICE", "CLOSE DATE"));
 		
 		for (Deal d : dealList) {
@@ -280,6 +278,29 @@ public class COAS {
 		}
 	}
 	
-	
+	private void deleteDeal(ArrayList<Deal> dealList) {
+		COAS.setHeader("Delete Deal");
+		
+		int delID = Helper.readInt("Enter deal ID you want to delete > ");
+		boolean isDeleted = false;
+		
+		for (Deal d : dealList) {
+			if (delID == d.getDealID()) {
+				char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
+				if (cfm == 'Y' || cfm == 'y') {
+					dealList.remove(d);
+					isDeleted = true;
+					System.out.println("Successfully deleted!");
+					break;
+				}
+				else {
+					System.out.println("Delete was unsuccessful.");
+				}
+			}
+		}
+		if (isDeleted == false) {
+			System.out.println("No deals were found! Please enter a valid deal ID.");
+		}
+	}
 }
 	
