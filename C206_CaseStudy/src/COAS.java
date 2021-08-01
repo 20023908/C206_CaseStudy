@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import skeletonvibes.Bid;
-import skeletonvibes.Helper;
-
 public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
