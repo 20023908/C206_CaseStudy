@@ -24,14 +24,13 @@ public class COAS {
 
 		account buyer1 = new account("Justin", "Buyer", "Justin@yahoo.com", "testing123");
 		account seller1 = new account("Jasmine", "Seller", "Jasmine@yahoo.com", "testing321");
-		
-		accountList.addAll(Arrays.asList(buyer1,seller1));
-		
-		dealList.add(new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com",
-				1020.50, "08/12/2019"));
-		dealList.add(new Deal(69, "Love Service 999", "balmond@gmail.com", "johnson@gmail.com",
-				69.69, "20/05/2019"));
-		
+
+		accountList.addAll(Arrays.asList(buyer1, seller1));
+
+		dealList.add(
+				new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com", 1020.50, "08/12/2019"));
+		dealList.add(new Deal(69, "Love Service 999", "balmond@gmail.com", "johnson@gmail.com", 69.69, "20/05/2019"));
+
 		bidList.add(new Bid(1, "Spaceship Computer", 1000, "Jasmine@yahoo.com", "Justin@yahoo.com"));
 		bidList.add(new Bid(2, "Love Service 999", 60, "balmond@gmail.com", "johnson@gmail.com"));
 
@@ -60,7 +59,7 @@ public class COAS {
 				} else if (type == 3) {
 					// nelly add method
 					item item1 = inputItem();
-					COAS.additem(itemList,item1);
+					COAS.additem(itemList, item1);
 
 				} else if (type == 4) {
 					// qid add method
@@ -69,10 +68,9 @@ public class COAS {
 
 				} else if (type == 5) {
 
-					//gy add method
+					// gy add method
 					Deal deal1 = inputDeal();
 					COAS.addDeal(dealList, deal1);
-
 
 				} else {
 					System.out.println("Invalid type");
@@ -95,7 +93,8 @@ public class COAS {
 
 				} else if (type == 3) {
 					// nelly view method
-					viewItem(itemList);
+					COAS.setHeader("VIEW ALL ITEMS");
+					viewAllItems(itemList);
 
 				} else if (type == 4) {
 					// qid view method
@@ -135,7 +134,7 @@ public class COAS {
 
 				} else if (type == 5) {
 
-					//gy delete method
+					// gy delete method
 					deleteDeal(dealList);
 
 				} else {
@@ -150,9 +149,6 @@ public class COAS {
 		}
 
 	}
-
-
-
 
 	public static void viewMenu() {
 		COAS.setHeader("CAMPUS Online Auction Shop (COAS)");
@@ -176,12 +172,12 @@ public class COAS {
 		System.out.println("4. Bid");
 		System.out.println("5. Deal");
 	}
-	
-	// (1) dan user 
+
+	// (1) dan user
 
 	public static account inputUser() {
 		COAS.setHeader("Add User Account");
-		
+
 		String user = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Buyer/Seller) > ");
 		String email = Helper.readString("Enter email > ");
@@ -192,7 +188,7 @@ public class COAS {
 	}
 
 	public static void addUser(ArrayList<account> accountList, account user1, String email) {
-		
+
 		for (account a : accountList) {
 			email = a.getEmail();
 		}
@@ -208,7 +204,7 @@ public class COAS {
 			System.out.println("Password must be more than 8 characters long!");
 		}
 	}
-	
+
 	public static String retrieveUser(ArrayList<account> accountList) {
 		String outputUser = "";
 
@@ -229,15 +225,15 @@ public class COAS {
 		outputUser += retrieveUser(accountList);
 		System.out.println(outputUser);
 	}
-	
+
 	public static boolean doDeleteUser(ArrayList<account> accountList, String inputEmail) {
-		
+
 		boolean isDeleted = false;
-		
+
 		for (account i : accountList) {
-			
+
 			String email = i.getEmail();
-			
+
 			if (inputEmail.equalsIgnoreCase(email)) {
 				accountList.remove(i);
 				isDeleted = true;
@@ -262,7 +258,6 @@ public class COAS {
 
 	// (2) jh category
 
-	
 	// (3) nelly item
 	public static item inputItem() {
 		COAS.setHeader("Add New Item");
@@ -275,74 +270,72 @@ public class COAS {
 		double bidInc = Helper.readDouble("Enter bid increment > ");
 		item item1 = new item(itemName, itemDesc, minBidPrice, maxBidPrice, auctionStart, auctionEnd, bidInc);
 		return item1;
-		
-		public static additem(ArrayList<item> itemList, item item1) {
-			
-			if (item1.getItemName().isEmpty() || item1.getItemDesc().isEmpty() || item1.getAuctionStart().isEmpty() || item1.getAuctionEnd().isEmpty() )
-					 {
-				System.out.println("Please fill in all the required fields!");
-			}
-			else {
-				itemList.add(item1);
-				System.out.println("Successfully added a new item!");
-			}
-			
-		}
-		
-		public static String retrieveAllItem(ArrayList<item> itemList) {
-			String output = "";
-
-			for (item i : itemList) {
-
-				output += String.format("\n%-10s %-25s %-30.2f %-30.2f %-20s %-20s %-20.2f", 
-						i.getItemName(), i.getItemDesc(), i.getMinBidPrice(), i.getMaxBidPrice(), i.getAuctionStart(), i.getAuctionEnd(), i.getBidinc());
-			}
-			return output;
-		}
-		
-		public static void showAllItems(ArrayList<item> itemList) {
-			
-			String output = String.format("\n%-10s %-25s %-30s %-30s %-20s %-20s %-20s", "ITEM NAME", "ITEM DESCRIPTION", "MIN BID PRICE", "MAX BID PRICE", "AUCTION START", "AUCTION END", "BID INCREMENT");
-			output += retrieveAllItem(itemList);
-			System.out.println(output);
-		
-		}
-		
-		public static boolean doDeleteItem(ArrayList<item> itemList, itemName) {
-
-			boolean isDeleted = false;
-
-			for (item i : itemList) {
-				if (itemName == i.getItemName()) {
-					itemList.remove(i);
-					isDeleted = true;
-					break;
-				}
-			}
-		
-			return isDeleted;
-		}
-
-		public static void deleteItem(ArrayList<item> itemList) {
-			COAS.setHeader("Delete Item");
-			COAS.showAllItem(itemList);
-			String itemName = Helper.readString("Enter item name you want to delete > ");
-			char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");	
-			boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
-			
-			if (isDeleted == false) {
-				System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
-			}
-			else {
-				System.out.println("Deal ID "+ dealID + " successfully deleted!");
-			}
-		}
-		
-		
 	}
-	
+
+	public static void additem(ArrayList<item> itemList, item item1) {
+
+		if (item1.getItemName().isEmpty() || item1.getItemDesc().isEmpty() || item1.getAuctionStart().isEmpty()
+				|| item1.getAuctionEnd().isEmpty()) {
+			System.out.println("Please fill in all the required fields!");
+		} else {
+			itemList.add(item1);
+			System.out.println("Successfully added a new item!");
+		}
+
+	}
+
+	public static String retrieveAllItem(ArrayList<item> itemList) {
+		String output = "";
+
+		for (item i : itemList) {
+
+			output += String.format("\n%-10s %-25s %-30.2f %-30.2f %-20s %-20s %-20.2f", i.getItemName(),
+					i.getItemDesc(), i.getMinBidPrice(), i.getMaxBidPrice(), i.getAuctionStart(), i.getAuctionEnd(),
+					i.getBidinc());
+		}
+		return output;
+	}
+
+	public static void viewAllItems(ArrayList<item> itemList) {
+
+		String output = String.format("\n%-10s %-25s %-30s %-30s %-20s %-20s %-20s", "ITEM NAME", "ITEM DESCRIPTION",
+				"MIN BID PRICE", "MAX BID PRICE", "AUCTION START", "AUCTION END", "BID INCREMENT");
+		output += retrieveAllItem(itemList);
+		System.out.println(output);
+
+	}
+
+	public static boolean doDeleteItem(ArrayList<item> itemList, String itemName, char cfm) {
+
+		boolean isDeleted = false;
+
+		for (item i : itemList) {
+			if (itemName == i.getItemName() && (cfm == 'Y' || cfm == 'y')) {
+				itemList.remove(i);
+				isDeleted = true;
+				break;
+			}
+		}
+
+		return isDeleted;
+	}
+
+	public static void deleteItem(ArrayList<item> itemList) {
+		COAS.setHeader("Delete Item");
+		COAS.viewAllItems(itemList);
+		String itemName = Helper.readString("Enter item name you want to delete > ");
+		char cfm = Helper.readChar("Are you sure you want to delete this item? (Y/N) > ");
+		boolean isDeleted = doDeleteItem(itemList, itemName, cfm);
+
+		if (isDeleted == false) {
+			System.out.println("Item name not found!");
+		} else {
+			System.out.println("item name " + itemName + " successfully deleted!");
+		}
+	}
 
 	
+
 	// (4) qid bid
 	public static Bid inputBid() {
 		COAS.setHeader("Add New Bid");
@@ -353,47 +346,46 @@ public class COAS {
 		String sellerEmail = Helper.readString("Enter Seller's Email > ");
 		Bid bid1 = new Bid(bidID, itemName, bidAmt, buyerEmail, sellerEmail);
 		return bid1;
-		
+
 	}
-	
+
 	public static void addBid(ArrayList<Bid> bidList, Bid bid1) {
 		String message = "";
-		if (bid1.getItemName().isEmpty() || bid1.getBuyerEmail().isEmpty() ||
-				bid1.getSellerEmail().isEmpty()) {
+		if (bid1.getItemName().isEmpty() || bid1.getBuyerEmail().isEmpty() || bid1.getSellerEmail().isEmpty()) {
 			message += "Please fill in all the required fields!\n";
-		}
-		else {
+		} else {
 			for (item I : itemList) {
 				if (bid1.getItemName().toLowerCase().equalsIgnoreCase(I.getItemName().toLowerCase())) {
 					double calcBidAmt = I.getMinBidPrice() + I.getBidinc();
 					if (bid1.getBidAmt() < calcBidAmt) {
 						message += "Bid cannot be lower than the current bidding price!";
-					}
-					else {
+					} else {
 						I.setMinBidPrice(calcBidAmt);
 						bidList.add(bid1);
-						message += "Successfully added a new bid!";	
+						message += "Successfully added a new bid!";
 					}
 				}
 			}
 		}
 		System.out.println(message);
 	}
+
 	public static String retrieveAllBids(ArrayList<Bid> bidList) {
-		String output = ""; 
+		String output = "";
 		for (Bid B : bidList) {
-			output += String.format("\n%-10d %-25s %-25.2f %-25s %s", 
-					B.getBidID(), B.getItemName(), B.getBidAmt(), B.getBuyerEmail(), B.getSellerEmail());
+			output += String.format("\n%-10d %-25s %-25.2f %-25s %s", B.getBidID(), B.getItemName(), B.getBidAmt(),
+					B.getBuyerEmail(), B.getSellerEmail());
 		}
 		return output;
 	}
-	
+
 	public static void showAllBids(ArrayList<Bid> bidList) {
-		String output = String.format("%-10s %-25s %-25s %-25s %s", "BID ID", "ITEM NAME", "BID AMOUNT", "BUYER'S EMAIL", "SELLER'S EMAIL");
+		String output = String.format("%-10s %-25s %-25s %-25s %s", "BID ID", "ITEM NAME", "BID AMOUNT",
+				"BUYER'S EMAIL", "SELLER'S EMAIL");
 		output += retrieveAllBids(bidList);
 		System.out.println(output);
 	}
-	
+
 	public static boolean doDeleteBid(ArrayList<Bid> bidList, int deleteID, char cfm) {
 		boolean isDeleted = false;
 		for (int i = 0; i < bidList.size(); i++) {
@@ -404,73 +396,70 @@ public class COAS {
 		}
 		return isDeleted;
 	}
-	
+
 	public static void deleteID(ArrayList<Bid> bidList) {
 		COAS.setHeader("Delete Bid");
 		COAS.showAllBids(bidList);
 		int deleteID = Helper.readInt("Enter Bid ID to delete > ");
 		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
 		boolean isDeleted = doDeleteBid(bidList, deleteID, cfm);
-		
+
 		if (isDeleted == false) {
 			System.out.println("Invalid Bid ID");
-		}
-		else {
+		} else {
 			System.out.println("Bid ID " + deleteID + " successfully deleted!");
 		}
 	}
-	
+
 	// (5) gy deal
-	
+
 	public static Deal inputDeal() {
 		COAS.setHeader("Add New Deal");
-		
+
 		int dealID = Helper.readInt("Enter deal ID > ");
 		String itemName = Helper.readString("Enter item name > ");
 		String sellerEmail = Helper.readString("Enter seller's email > ");
 		String buyerEmail = Helper.readString("Enter buyer's email > ");
 		double price = Helper.readDouble("Enter transaction price > ");
 		String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > ");
-		
+
 		Deal deal1 = new Deal(dealID, itemName, sellerEmail, buyerEmail, price, closeDate);
 		return deal1;
-		
+
 	}
 
 	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
-		
-		if (deal1.getItemName().isEmpty() || deal1.getSellerEmail().isEmpty() 
-				|| deal1.getBuyerEmail().isEmpty() || deal1.getCloseDate().isEmpty()) {
+
+		if (deal1.getItemName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
+				|| deal1.getCloseDate().isEmpty()) {
 			System.out.println("Please fill in all the required fields!");
-		}
-		else {
+		} else {
 			dealList.add(deal1);
 			System.out.println("Successfully added a new deal!");
 		}
-		
+
 	}
-	
+
 	public static String retrieveAllDeals(ArrayList<Deal> dealList) {
 		String output = "";
 
 		for (Deal d : dealList) {
 
-			output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", 
-					d.getDealID(), d.getItemName(), d.getSellerEmail(), d.getBuyerEmail(),
-					d.getPrice(), d.getCloseDate());
+			output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", d.getDealID(), d.getItemName(),
+					d.getSellerEmail(), d.getBuyerEmail(), d.getPrice(), d.getCloseDate());
 		}
 		return output;
 	}
-	
+
 	public static void showAllDeals(ArrayList<Deal> dealList) {
-		
+
 		String output = String.format("%-10s %-25s %-30s %-30s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
 				"BUYER EMAIL", "PRICE", "CLOSE DATE");
 		output += retrieveAllDeals(dealList);
 		System.out.println(output);
-	
+
 	}
-	
+
 	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int dealID, char cfm) {
 
 		boolean isDeleted = false;
@@ -482,7 +471,7 @@ public class COAS {
 				break;
 			}
 		}
-	
+
 		return isDeleted;
 	}
 
@@ -490,14 +479,13 @@ public class COAS {
 		COAS.setHeader("Delete Deal");
 		COAS.showAllDeals(dealList);
 		int dealID = Helper.readInt("Enter deal ID you want to delete > ");
-		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");	
+		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
 		boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
-		
+
 		if (isDeleted == false) {
 			System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
-		}
-		else {
-			System.out.println("Deal ID "+ dealID + " successfully deleted!");
+		} else {
+			System.out.println("Deal ID " + dealID + " successfully deleted!");
 		}
 	}
 }
