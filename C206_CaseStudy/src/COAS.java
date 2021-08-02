@@ -31,7 +31,9 @@ public class COAS {
 				1020.50, "08/12/2019"));
 		dealList.add(new Deal(69, "Love Service 999", "balmond@gmail.com", "johnson@gmail.com",
 				69.69, "20/05/2019"));
-
+		
+		bidList.add(new Bid(1, "Spaceship Computer", 1000, "Jasmine@yahoo.com", "Justin@yahoo.com"));
+		bidList.add(new Bid(2, "Love Service 999", 60, "balmond@gmail.com", "johnson@gmail.com"));
 
 		int option = 0;
 		while (option != 4) {
@@ -61,7 +63,8 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid add method
-					addBid(bidList);
+					Bid bid1 = inputBid();
+					COAS.addBid(bidList, bid1);
 
 				} else if (type == 5) {
 
@@ -95,7 +98,8 @@ public class COAS {
 
 				} else if (type == 4) {
 					// qid view method
-					viewBid(bidList);
+					COAS.setHeader("Show All Bids");
+					showAllBids(bidList);
 
 				} else if (type == 5) {
 					// gy view method
@@ -307,13 +311,13 @@ public class COAS {
 		}
 		else {
 			for (item I : itemList) {
-				if (bid1.getItemName().toLowerCase().equalsIgnoreCase(I.getItem().toLowerCase())) {
-					double calcBidAmt = I.getMinBidprice() + I.getBidIncrement();
+				if (bid1.getItemName().toLowerCase().equalsIgnoreCase(I.getItemName().toLowerCase())) {
+					double calcBidAmt = I.getMinBidPrice() + I.getBidinc();
 					if (bid1.getBidAmt() < calcBidAmt) {
 						message += "Bid cannot be lower than the current bidding price!";
 					}
 					else {
-						I.setMinBidprice(calcBidAmt);
+						I.setMinBidPrice(calcBidAmt);
 						bidList.add(bid1);
 						message += "Successfully added a new bid!";	
 					}
