@@ -15,5 +15,53 @@
  */
 public class item {
 	//create parent class
+	private String itemName;
+	private String itemDesc;
+	private double minBidPrice;
+	public double maxBidPrice;
+	private String auctionStart;
+	private String auctionEnd;
+	private double bidinc;
+
+	public item(String itemName, String itemDesc, double minBidPrice, double maxBidPrice, String auctionStart,
+			String auctionEnd, double bidinc) {
+		super();
+		this.itemName = itemName;
+		this.itemDesc = itemDesc;
+		this.minBidPrice = minBidPrice;
+		this.maxBidPrice = maxBidPrice;
+		this.auctionStart = auctionStart;
+		this.auctionEnd = auctionEnd;
+		this.bidinc = bidinc;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+	public double getMinBidPrice() {
+		return minBidPrice;
+	}
+
+	public double getMaxBidPrice() {
+		return maxBidPrice;
+	}
+
+	public String getAuctionStart() {
+		return auctionStart;
+	}
+
+
+	public String getAuctionEnd() {
+		return auctionEnd;
+	}
+
+	public double getBidinc() {
+		return bidinc;
+	}
 
 }
