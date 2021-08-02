@@ -59,7 +59,8 @@ public class COAS {
 
 				} else if (type == 3) {
 					// nelly add method
-					additem(itemList);
+					item item1 = inputItem();
+					COAS.additem(itemList,item1);
 
 				} else if (type == 4) {
 					// qid add method
@@ -149,6 +150,9 @@ public class COAS {
 		}
 
 	}
+
+
+
 
 	public static void viewMenu() {
 		COAS.setHeader("CAMPUS Online Auction Shop (COAS)");
@@ -272,10 +276,10 @@ public class COAS {
 		item item1 = new item(itemName, itemDesc, minBidPrice, maxBidPrice, auctionStart, auctionEnd, bidInc);
 		return item1;
 		
-		public static void additem(ArrayList<item> itemList, item item1) {
+		public static additem(ArrayList<item> itemList, item item1) {
 			
-			if (item1.getItemName().isEmpty() || item1.getItemDesc().isEmpty() 
-					|| item1.getMinBidPrice().isEmpty() || item1.getMaxBidPrice().isEmpty()) || item1.getAuctionStart().isEmpty() || item1.getAuctionEnd().isEmpty() || item1.getBidinc().isEmpty() ) {
+			if (item1.getItemName().isEmpty() || item1.getItemDesc().isEmpty() || item1.getAuctionStart().isEmpty() || item1.getAuctionEnd().isEmpty() )
+					 {
 				System.out.println("Please fill in all the required fields!");
 			}
 			else {
@@ -283,6 +287,55 @@ public class COAS {
 				System.out.println("Successfully added a new item!");
 			}
 			
+		}
+		
+		public static String retrieveAllItem(ArrayList<item> itemList) {
+			String output = "";
+
+			for (item i : itemList) {
+
+				output += String.format("\n%-10s %-25s %-30.2f %-30.2f %-20s %-20s %-20.2f", 
+						i.getItemName(), i.getItemDesc(), i.getMinBidPrice(), i.getMaxBidPrice(), i.getAuctionStart(), i.getAuctionEnd(), i.getBidinc());
+			}
+			return output;
+		}
+		
+		public static void showAllItems(ArrayList<item> itemList) {
+			
+			String output = String.format("\n%-10s %-25s %-30s %-30s %-20s %-20s %-20s", "ITEM NAME", "ITEM DESCRIPTION", "MIN BID PRICE", "MAX BID PRICE", "AUCTION START", "AUCTION END", "BID INCREMENT");
+			output += retrieveAllItem(itemList);
+			System.out.println(output);
+		
+		}
+		
+		public static boolean doDeleteItem(ArrayList<item> itemList, itemName) {
+
+			boolean isDeleted = false;
+
+			for (item i : itemList) {
+				if (itemName == i.getItemName()) {
+					itemList.remove(i);
+					isDeleted = true;
+					break;
+				}
+			}
+		
+			return isDeleted;
+		}
+
+		public static void deleteItem(ArrayList<item> itemList) {
+			COAS.setHeader("Delete Item");
+			COAS.showAllItem(itemList);
+			String itemName = Helper.readString("Enter item name you want to delete > ");
+			char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");	
+			boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
+			
+			if (isDeleted == false) {
+				System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
+			}
+			else {
+				System.out.println("Deal ID "+ dealID + " successfully deleted!");
+			}
 		}
 		
 		
