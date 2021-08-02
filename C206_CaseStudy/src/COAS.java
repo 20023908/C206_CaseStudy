@@ -57,6 +57,7 @@ public class COAS {
 
 				} else if (type == 3) {
 					// nelly add method
+					additem(itemList);
 
 				} else if (type == 4) {
 					// qid add method
@@ -90,6 +91,7 @@ public class COAS {
 
 				} else if (type == 3) {
 					// nelly view method
+					viewItem(itemList);
 
 				} else if (type == 4) {
 					// qid view method
@@ -120,6 +122,7 @@ public class COAS {
 
 				} else if (type == 3) {
 					// nelly delete method
+					deleteItem(itemList);
 
 				} else if (type == 4) {
 					// qid delete method
@@ -253,6 +256,34 @@ public class COAS {
 
 	
 	// (3) nelly item
+	public static item inputItem() {
+		COAS.setHeader("Add New Item");
+		String itemName = Helper.readString("Enter item name > ");
+		String itemDesc = Helper.readString("Item description > ");
+		double minBidPrice = Helper.readDouble("Enter minimum bid price >$");
+		double maxBidPrice = Helper.readDouble("Enter maximum bid price > $");
+		String auctionStart = Helper.readString("Enter auction start date > ");
+		String auctionEnd = Helper.readString("Enter auction end date > ");
+		double bidInc = Helper.readDouble("Enter bid increment > ");
+		item item1 = new item(itemName, itemDesc, minBidPrice, maxBidPrice, auctionStart, auctionEnd, bidInc);
+		return item1;
+		
+		public static void additem(ArrayList<item> itemList, item item1) {
+			
+			if (item1.getItemName().isEmpty() || item1.getItemDesc().isEmpty() 
+					|| item1.getMinBidPrice().isEmpty() || item1.getMaxBidPrice().isEmpty()) || item1.getAuctionStart().isEmpty() || item1.getAuctionEnd().isEmpty() || item1.getBidinc().isEmpty() ) {
+				System.out.println("Please fill in all the required fields!");
+			}
+			else {
+				itemList.add(item1);
+				System.out.println("Successfully added a new item!");
+			}
+			
+		}
+		
+		
+	}
+	
 
 	
 	// (4) qid bid
