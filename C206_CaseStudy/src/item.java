@@ -64,4 +64,8 @@ public class item {
 		return bidinc;
 	}
 
+	public void setMinBidPrice(double minBidPrice) {
+		this.minBidPrice = minBidPrice;
+	}
+
 }
