@@ -26,6 +26,8 @@ public class COAS {
 		account seller1 = new account("Jasmine", "Seller", "Jasmine@yahoo.com", "testing321");
 
 		accountList.addAll(Arrays.asList(buyer1, seller1));
+		
+		itemList.equals(buyer1);
 
 		dealList.add(
 				new Deal(12, "Spaceship Computer", "Jasmine@yahoo.com", "Justin@yahoo.com", 1020.50, "08/12/2019"));
