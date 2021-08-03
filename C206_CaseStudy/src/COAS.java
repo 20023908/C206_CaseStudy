@@ -13,6 +13,7 @@ public class COAS {
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
 	private static ArrayList<Bid> bidList = new ArrayList<Bid>();
 	private static ArrayList<item> itemList = new ArrayList<item>();
+	private static ArrayList<Category> categoryList = new ArrayList<Category>;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -57,7 +58,9 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh add method
-
+					Category category = inputCategory();
+					COAS.addCategory(categoryList, category1);
+					
 				} else if (type == 3) {
 					// nelly add method
 					item item1 = inputItem();
@@ -92,6 +95,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh view method
+					COAS.setHeader("VIEW ALL CATEGORIES");
+					COAS.viewAllCategories(accountList);
 
 				} else if (type == 3) {
 					// nelly view method
@@ -125,7 +130,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh delete method
-
+					deleteCategory(categoryList);
+					
 				} else if (type == 3) {
 					// nelly delete method
 					deleteItem(itemList);
@@ -259,7 +265,25 @@ public class COAS {
 	}
 
 	// (2) jh category
-
+	
+	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
+		categoryList.add(category1);
+		System.out.println("Category added");
+	}
+	
+	public static void viewAllCategories(ArrayList<Category> categoryList) {
+		COAS.setHeader("CATEGORY LIST");
+		String output += retrieveAllCategory(categoryList);
+		System.out.println(output);
+	}
+	
+	  public static String retrieveCategories(ArrayList<Category> categoryList) {
+		  String output = String.format("%s \n", "NAME");
+		  for (int i = 0; i < categoryList.size(); i++) {
+			  output += String.format("%s \n", categoryList.get(i).toString()); }
+		  return output;
+    }
+	
 	// (3) nelly item
 	public static item inputItem() {
 		COAS.setHeader("Add New Item");
