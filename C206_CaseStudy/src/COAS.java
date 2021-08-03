@@ -266,11 +266,10 @@ public class COAS {
 		String itemName = Helper.readString("Enter item name > ");
 		String itemDesc = Helper.readString("Item description > ");
 		double minBidPrice = Helper.readDouble("Enter minimum bid price >$");
-		double maxBidPrice = Helper.readDouble("Enter maximum bid price > $");
 		String auctionStart = Helper.readString("Enter auction start date > ");
 		String auctionEnd = Helper.readString("Enter auction end date > ");
 		double bidInc = Helper.readDouble("Enter bid increment > ");
-		item item1 = new item(itemName, itemDesc, minBidPrice, maxBidPrice, auctionStart, auctionEnd, bidInc);
+		item item1 = new item(itemName, itemDesc, minBidPrice, auctionStart, auctionEnd, bidInc);
 		return item1;
 	}
 
