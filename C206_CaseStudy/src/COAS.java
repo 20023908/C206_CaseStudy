@@ -11,7 +11,7 @@ public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
-	private ArrayList<Bid> bidList = new ArrayList<Bid>();
+	private static ArrayList<Bid> bidList = new ArrayList<Bid>();
 	private static ArrayList<item> itemList = new ArrayList<item>();
 
 	public static void main(String[] args) {
@@ -338,20 +338,27 @@ public class COAS {
 	
 
 	// (4) qid bid
+	public static final int bidCounter = 1;
+	
 	public static Bid inputBid() {
 		COAS.setHeader("Add New Bid");
-		int bidID = Helper.readInt("Enter Bid ID > ");
+		int bidCounter = 1;
+		for (Bid B : bidList) {
+			if (B.getBidID() == bidCounter) {
+				bidCounter++;	
+			}
+		}
 		String itemName = Helper.readString("Item to Bid > ");
 		double bidAmt = Helper.readDouble("Enter Amount to Bid >$");
 		String buyerEmail = Helper.readString("Enter Buyer's Email > ");
 		String sellerEmail = Helper.readString("Enter Seller's Email > ");
-		Bid bid1 = new Bid(bidID, itemName, bidAmt, buyerEmail, sellerEmail);
+		Bid bid1 = new Bid(bidCounter, itemName, bidAmt, buyerEmail, sellerEmail);
 		return bid1;
-
 	}
 
 	public static void addBid(ArrayList<Bid> bidList, Bid bid1) {
 		String message = "";
+		boolean isAvailable = false;
 		if (bid1.getItemName().isEmpty() || bid1.getBuyerEmail().isEmpty() || bid1.getSellerEmail().isEmpty()) {
 			message += "Please fill in all the required fields!\n";
 		} else {
@@ -364,9 +371,13 @@ public class COAS {
 						I.setMinBidPrice(calcBidAmt);
 						bidList.add(bid1);
 						message += "Successfully added a new bid!";
+						isAvailable = true;
 					}
 				}
 			}
+		}
+		if (isAvailable == false) {
+			message = "Item not found!";
 		}
 		System.out.println(message);
 	}
