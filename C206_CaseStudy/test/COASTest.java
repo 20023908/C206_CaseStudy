@@ -19,6 +19,11 @@ public class COASTest {
 	
 	
 	// Nelly
+	private item item1;
+	private item item2;
+	
+	private ArrayList<item> itemList = new ArrayList<item>();
+	
 			
 			
 	// Qid
@@ -45,7 +50,8 @@ public class COASTest {
 		
 		
 		// Nelly
-		
+		item1 = new item("mobile phone","Iphone6",600,"12/12/2020","12/12/2022",50);
+		item2 = new item("laptop","ASUS",700,"10/12/2020","25/12/2022",20);
 		
 		// Qid
 		
@@ -119,6 +125,13 @@ public class COASTest {
 	
 	
 	// Nelly
+	public void viewAllItems() {
+		//retrieve and display item list
+		String item = COAS.retrieveAllItem(itemList);
+		String testOutput = "";
+		assertSame("test that able to viewAllUsers", testOutput, item);
+		  
+	}
 			
 			
 	// Qid
@@ -224,6 +237,11 @@ public class COASTest {
 		
 		
 		// Nelly
+		
+		item1 = null;
+		item2 = null;
+		
+		itemList = null;
 				
 				
 		// Qid
