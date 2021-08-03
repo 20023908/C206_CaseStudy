@@ -134,6 +134,7 @@ public class COASTest {
 	
 	
 	// Nelly
+	@Test
 	public void viewAllItems() {
 		//retrieve and display item list
 		String item = COAS.retrieveAllItem(itemList);
@@ -144,6 +145,7 @@ public class COASTest {
 		COAS.additem(itemList, item2);
 		assertEquals("Test that item arraylist size is 2", 2, itemList.size());
 	}
+	@Test
 	public void additem() {
 		//retrieve and display item list
 				String item = COAS.retrieveAllItem(itemList);
@@ -163,6 +165,7 @@ public class COASTest {
 				assertSame("Test that item2 is added", item2, itemList.get(1));
 
 	}
+	@Test
 	public void doDeleteItem() {
 		COAS.retrieveAllItem(itemList);
 		COAS.additem(itemList, item1);
