@@ -129,8 +129,29 @@ public class COASTest {
 		//retrieve and display item list
 		String item = COAS.retrieveAllItem(itemList);
 		String testOutput = "";
-		assertSame("test that able to viewAllUsers", testOutput, item);
+		assertSame("test that able to viewAllItems", testOutput, item);
 		  
+	}
+	public void additem() {
+		//retrieve and display item list
+				String item = COAS.retrieveAllItem(itemList);
+				String testOutput = "";
+				assertSame("test that able to viewAllItems", testOutput, item);
+				
+				COAS.additem(itemList, item1);
+				COAS.additem(itemList, item2);
+
+				assertNotNull("test if it is a valid item name", itemList);
+				assertNotNull("test if it is an invalid item name", itemList);
+				
+				assertSame("Test that item1 is added", item1, itemList.get(1));
+				assertSame("Test that item2 is added", item2, itemList.get(1));
+
+	}
+	public void doDeleteItem() {
+		COAS.retrieveAllItem(itemList);
+		COAS.additem(itemList, item1);
+		
 	}
 			
 			
