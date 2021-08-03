@@ -164,6 +164,7 @@ public class COASTest {
 			
 			
 	// Qid
+	@Test
 	public void addBidTest() {
 		//BidList 
 		assertNotNull("Check if there is a valid Bid arraylist to add to", bidList);
@@ -176,7 +177,7 @@ public class COASTest {
 		assertEquals("Check that Bid arraylist size is 2", 2, bidList.size());
 		assertSame("Check that Bid is added", bid2, bidList.get(1));
 	}
-	
+	@Test
 	public void retrieveAllBidTest() {
 		assertNotNull("Test if there is a valid Bid arraylist to retrieve bidding", bidList);
 		
@@ -198,7 +199,7 @@ public class COASTest {
 		
 		assertEquals("Test that ViewAllBidList", testOutput, allBids);
 	}
-	
+	@Test
 	public void doDeleteBidTest() {
 		//boundary
 		assertNotNull("Test if there is a valid Bid arraylist to delete from", bidList);
