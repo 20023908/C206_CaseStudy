@@ -140,6 +140,9 @@ public class COASTest {
 		String testOutput = "";
 		assertSame("test that able to viewAllItems", testOutput, item);
 		  
+		COAS.additem(itemList, item1);
+		COAS.additem(itemList, item2);
+		assertEquals("Test that item arraylist size is 2", 2, itemList.size());
 	}
 	public void additem() {
 		//retrieve and display item list
@@ -149,10 +152,13 @@ public class COASTest {
 				
 				COAS.additem(itemList, item1);
 				COAS.additem(itemList, item2);
-
+				
+				//normal
 				assertNotNull("test if it is a valid item name", itemList);
+				//error
 				assertNotNull("test if it is an invalid item name", itemList);
 				
+				//normal
 				assertSame("Test that item1 is added", item1, itemList.get(1));
 				assertSame("Test that item2 is added", item2, itemList.get(1));
 
@@ -160,6 +166,27 @@ public class COASTest {
 	public void doDeleteItem() {
 		COAS.retrieveAllItem(itemList);
 		COAS.additem(itemList, item1);
+		COAS.additem(itemList, item2);
+		
+		assertNotNull("test that there is valid item arraylist to retrieve item", itemList);
+		
+		//normal
+		boolean delete = COAS.doDeleteItem(itemList, "mobile phone",'y');
+		assertTrue("test that item name matches with itemlist and cam be deleted",delete);
+		
+		//normal
+		delete = COAS.doDeleteItem(itemList, "mobile phone",'Y');
+		assertTrue("test that item name matches with itemlist and cam be deleted",delete);
+	
+		//error
+		 delete = COAS.doDeleteItem(itemList, "mobile pphonee",'y');
+		assertTrue("test that item name does not match with item name in itemlist and cannot be deleted",delete);
+	
+		//error
+		 delete = COAS.doDeleteItem(itemList, "mobile pphonee",'Y');
+		assertTrue("test that item name does not match with item name in itemlist and cannot be deleted",delete);
+	
+		
 		
 	}
 			
