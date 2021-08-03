@@ -18,18 +18,16 @@ public class item {
 	private String itemName;
 	private String itemDesc;
 	private double minBidPrice;
-	public double maxBidPrice;
 	private String auctionStart;
 	private String auctionEnd;
 	private double bidinc;
 
-	public item(String itemName, String itemDesc, double minBidPrice, double maxBidPrice, String auctionStart,
+	public item(String itemName, String itemDesc, double minBidPrice, String auctionStart,
 			String auctionEnd, double bidinc) {
 		super();
 		this.itemName = itemName;
 		this.itemDesc = itemDesc;
 		this.minBidPrice = minBidPrice;
-		this.maxBidPrice = maxBidPrice;
 		this.auctionStart = auctionStart;
 		this.auctionEnd = auctionEnd;
 		this.bidinc = bidinc;
@@ -47,9 +45,6 @@ public class item {
 		return minBidPrice;
 	}
 
-	public double getMaxBidPrice() {
-		return maxBidPrice;
-	}
 
 	public String getAuctionStart() {
 		return auctionStart;
