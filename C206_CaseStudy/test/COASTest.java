@@ -169,7 +169,6 @@ public class COASTest {
 	public void addBidTest() {
 		//BidList 
 		assertNotNull("Check if there is a valid Bid arraylist to add to", bidList);
-		
 		COAS.addBid(bidList, bid1);
 		
 		assertEquals("Check that Bid arraylist size is 1", 1, bidList.size());
