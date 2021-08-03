@@ -337,56 +337,30 @@ public class COAS {
 
 	
 
-	// (4) qid bid
-	public static final int bidCounter = 1;
-	
+	// (4) qid bid	
 	public static Bid inputBid() {
 		COAS.setHeader("Add New Bid");
-		int bidCounter = 1;
-		for (Bid B : bidList) {
-			if (B.getBidID() == bidCounter) {
-				bidCounter++;	
-			}
-		}
+		int bidID = Helper.readInt("Enter Bid ID > ");
 		String itemName = Helper.readString("Item to Bid > ");
 		double bidAmt = Helper.readDouble("Enter Amount to Bid >$");
 		String buyerEmail = Helper.readString("Enter Buyer's Email > ");
 		String sellerEmail = Helper.readString("Enter Seller's Email > ");
-		Bid bid1 = new Bid(bidCounter, itemName, bidAmt, buyerEmail, sellerEmail);
-		return bid1;
+		Bid bid = new Bid(bidID, itemName, bidAmt, buyerEmail, sellerEmail);
+		return bid;
 	}
 
-	public static void addBid(ArrayList<Bid> bidList, Bid bid1) {
-		String message = "";
-		boolean isAvailable = false;
-		if (bid1.getItemName().isEmpty() || bid1.getBuyerEmail().isEmpty() || bid1.getSellerEmail().isEmpty()) {
-			message += "Please fill in all the required fields!\n";
-		} else {
-			for (item I : itemList) {
-				if (bid1.getItemName().toLowerCase().equalsIgnoreCase(I.getItemName().toLowerCase())) {
-					double calcBidAmt = I.getMinBidPrice() + I.getBidinc();
-					if (bid1.getBidAmt() < calcBidAmt) {
-						message += "Bid cannot be lower than the current bidding price!";
-					} else {
-						I.setMinBidPrice(calcBidAmt);
-						bidList.add(bid1);
-						message += "Successfully added a new bid!";
-						isAvailable = true;
-					}
-				}
-			}
-		}
-		if (isAvailable == false) {
-			message = "Item not found!";
-		}
-		System.out.println(message);
+	public static void addBid(ArrayList<Bid> bidList, Bid bid) {
+		bidList.add(bid);
+		System.out.println("Bidding successful!");
 	}
 
 	public static String retrieveAllBids(ArrayList<Bid> bidList) {
 		String output = "";
-		for (Bid B : bidList) {
-			output += String.format("\n%-10d %-25s %-25.2f %-25s %s", B.getBidID(), B.getItemName(), B.getBidAmt(),
-					B.getBuyerEmail(), B.getSellerEmail());
+		for (int i = 0; i < bidList.size(); i++) {
+			output += String.format("\n%-10d %-25s %-25.2f %-25s %s", 
+					bidList.get(i).getBidID(), bidList.get(i).getItemName(), 
+					bidList.get(i).getBidAmt(),
+					bidList.get(i).getBuyerEmail(), bidList.get(i).getSellerEmail());
 		}
 		return output;
 	}
@@ -398,10 +372,10 @@ public class COAS {
 		System.out.println(output);
 	}
 
-	public static boolean doDeleteBid(ArrayList<Bid> bidList, int deleteID, char cfm) {
+	public static boolean doDeleteBid(ArrayList<Bid> bidList, int deleteID) {
 		boolean isDeleted = false;
 		for (int i = 0; i < bidList.size(); i++) {
-			if (bidList.get(i).getBidID() == (deleteID) && (cfm == 'Y' || cfm == 'y')) {
+			if (bidList.get(i).getBidID() == (deleteID)) {
 				bidList.remove(i);
 				isDeleted = true;
 			}
@@ -413,8 +387,7 @@ public class COAS {
 		COAS.setHeader("Delete Bid");
 		COAS.showAllBids(bidList);
 		int deleteID = Helper.readInt("Enter Bid ID to delete > ");
-		char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
-		boolean isDeleted = doDeleteBid(bidList, deleteID, cfm);
+		boolean isDeleted = doDeleteBid(bidList, deleteID);
 
 		if (isDeleted == false) {
 			System.out.println("Invalid Bid ID");
