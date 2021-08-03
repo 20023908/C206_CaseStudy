@@ -197,29 +197,37 @@ public class COASTest {
 	// Qid
 	@Test
 	public void addBidTest() {
-		//BidList 
+		//BidList is not null so can add new item - boundary
 		assertNotNull("Check if there is a valid Bid arraylist to add to", bidList);
-		COAS.addBid(bidList, bid1);
 		
+		//Given an empty bidList, upon adding 1 item, size of list is 1 - normal
+		COAS.addBid(bidList, bid1);
 		assertEquals("Check that Bid arraylist size is 1", 1, bidList.size());
+		//Check that item added matches first item in the list
 		assertSame("Check that Bid is added", bid1, bidList.get(0));
 		
+		//Add another item, size of list is 2 - normal
 		COAS.addBid(bidList, bid2);
 		assertEquals("Check that Bid arraylist size is 2", 2, bidList.size());
+		//Check that item added matches 2nd item in the list
 		assertSame("Check that Bid is added", bid2, bidList.get(1));
 	}
 	@Test
 	public void retrieveAllBidTest() {
+		//test if bidList is not null but empty - boundary
 		assertNotNull("Test if there is a valid Bid arraylist to retrieve bidding", bidList);
 		
+		//test if bidlist retrieved for COAS is empty - boundary
 		String allBids = COAS.retrieveAllBids(bidList);
 		String testOutput = "";
 		assertEquals("Check that showAllBids", testOutput, allBids);
 		
+		//with an empty list, add 2 items, size of list = 2 (normal)
 		COAS.addBid(bidList, bid1);
 		COAS.addBid(bidList, bid2);
 		assertEquals("Test that Bid arraylist size is 2", 2, bidList.size());
 		
+		//test if expected output matches the list for COAS 
 		allBids = COAS.retrieveAllBids(bidList);
 		testOutput = String.format("\n%-10s %-25s %-25s %-25s %s", "1", "Spaceship Computer", 
 				"1000.00", "Jasmine@yahoo.com", "Justin@yahoo.com");
@@ -234,11 +242,12 @@ public class COASTest {
 		assertNotNull("Test if there is a valid Bid arraylist to delete from", bidList);
 		COAS.addBid(bidList, bid1);
 		
-		//normal
+		//test that id will be deleted when it matches item in bidlist(normal)
 		Boolean ok = COAS.doDeleteBid(bidList, 1);
 		assertTrue("Test if bid id will be deleted", ok);
 		
-		//error
+		//test that id will not be deleted when it does not match item in bidlist(error)
+		COAS.addBid(bidList, bid2);
 		ok = COAS.doDeleteBid(bidList, 1);
 		assertFalse("Test if bid id will NOT be deleted", ok);
 		

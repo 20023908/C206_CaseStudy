@@ -1,17 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-
-import skeletonvibes.Bid;
-import skeletonvibes.COAS;
-import skeletonvibes.Helper;
-import skeletonvibes.item;
 
 public class COAS {
 
 	private ArrayList<account> accountList = new ArrayList<account>();
 	private ArrayList<Deal> dealList = new ArrayList<Deal>();
-	private static ArrayList<Bid> bidList = new ArrayList<Bid>();
+	private ArrayList<Bid> bidList = new ArrayList<Bid>();
 	private static ArrayList<item> itemList = new ArrayList<item>();
 
 	public static void main(String[] args) {
