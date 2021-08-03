@@ -290,8 +290,8 @@ public class COAS {
 
 		for (item i : itemList) {
 
-			output += String.format("\n%-10s %-25s %-30.2f %-30.2f %-20s %-20s %-20.2f", i.getItemName(),
-					i.getItemDesc(), i.getMinBidPrice(), i.getMaxBidPrice(), i.getAuctionStart(), i.getAuctionEnd(),
+			output += String.format("\n%-10s %-25s %-30.2f %-20s %-20s %-20.2f", i.getItemName(),
+					i.getItemDesc(), i.getMinBidPrice(), i.getAuctionStart(), i.getAuctionEnd(),
 					i.getBidinc());
 		}
 		return output;
@@ -299,8 +299,8 @@ public class COAS {
 
 	public static void viewAllItems(ArrayList<item> itemList) {
 
-		String output = String.format("\n%-10s %-25s %-30s %-30s %-20s %-20s %-20s", "ITEM NAME", "ITEM DESCRIPTION",
-				"MIN BID PRICE", "MAX BID PRICE", "AUCTION START", "AUCTION END", "BID INCREMENT");
+		String output = String.format("\n%-10s %-25s %-30s %-20s %-20s %-20s", "ITEM NAME", "ITEM DESCRIPTION",
+				"MIN BID PRICE", "AUCTION START", "AUCTION END", "BID INCREMENT");
 		output += retrieveAllItem(itemList);
 		System.out.println(output);
 
