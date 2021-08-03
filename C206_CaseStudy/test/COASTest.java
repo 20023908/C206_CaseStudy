@@ -7,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import skeletonvibes.Bid;
+
 public class COASTest {
 	
 	// Dan
@@ -27,6 +29,10 @@ public class COASTest {
 			
 			
 	// Qid
+	private Bid bid1;
+	private Bid bid2;
+	
+	private ArrayList<Bid> bidList = new ArrayList<Bid>();
 			
 			
 	// GY
@@ -54,6 +60,8 @@ public class COASTest {
 		item2 = new item("laptop","ASUS",700,"10/12/2020","25/12/2022",20);
 		
 		// Qid
+		bid1 = new Bid(1, "Spaceship Computer", 1000, "Jasmine@yahoo.com", "Justin@yahoo.com");
+		bid2 = new Bid(2, "Love Service 999", 60, "balmond@gmail.com", "johnson@gmail.com");
 		
 		
 		
@@ -156,7 +164,75 @@ public class COASTest {
 			
 			
 	// Qid
-			
+	public void addBidTest() {
+		//BidList 
+		assertNotNull("Check if there is a valid Bid arraylist to add to", bidList);
+		
+		COAS.addBid(bidList, bid1);
+		assertEquals("Check that Bid arraylist size is 1", 1, bidList.size());
+		assertSame("Check that Bid is added", bid1, bidList.get(0));
+		
+		COAS.addBid(bidList, bid2);
+		assertEquals("Check that Bid arraylist size is 2", 2, bidList.size());
+		assertSame("Check that Bid is added", bid2, bidList.get(1));
+	}
+	
+	public void retrieveAllBidTest() {
+		assertNotNull("Test if there is a valid Bid arraylist to retrieve bidding", bidList);
+		
+		String allBids = COAS.retrieveAllBids(bidList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllBidList", testOutput, allBids);
+		
+		COAS.addBid(bidList, bid1);
+		COAS.addBid(bidList, bid2);
+		assertEquals("Test that Bid arraylist size is 2", 2, bidList.size());
+		
+		allBids = COAS.retrieveAllBids(bidList);
+		bid1 = new Bid(1, "Spaceship Computer", 1000, "Jasmine@yahoo.com", "Justin@yahoo.com");
+		bid2 = new Bid(2, "Love Service 999", 60, "balmond@gmail.com", "johnson@gmail.com");
+		testOutput = String.format("\n%-10s %-25s %-30s %-30s %-9s %11s", "1", "Spaceship Computer", 
+				"1000", "Jasmine@yahoo.com", "Justin@yahoo.com");
+		testOutput += String.format("\\n%-10s %-25s %-30s %-30s %-9s %11s", "2", "Love Service 999", "60", 
+				"balmond@gmail.com", "johnson@gmail.com");
+		
+		assertEquals("Test that ViewAllBidList", testOutput, allBids);
+	}
+	
+	public void doDeleteBidTest() {
+		//boundary
+		assertNotNull("Test if there is a valid Bid arraylist to delete from", bidList);
+		
+		COAS.addBid(bidList, bid1);
+		
+		//normal
+		Boolean test = COAS.doDeleteBid(bidList, 1, 'Y');
+		assertTrue("Test that Bid1's id and cfm is the same as COAS.addBid", test);
+		
+		//normal
+		COAS.addBid(bidList, bid1);
+		test = COAS.doDeleteBid(bidList, 1, 'y');
+		assertTrue("Test that Bid1's id and cfm is the same as COAS.addBid", test);
+				
+		//error
+		test = COAS.doDeleteBid(bidList, 3, 'y');
+		assertFalse("Test that bid id is different but confirm is the same as COAS.addBid", test);	
+		
+		//error
+		test = COAS.doDeleteBid(bidList, 3, 'Y');
+		assertFalse("Test that bid id is different but confirm is the same as COAS.addBid", test);
+		
+		//error
+		test = COAS.doDeleteBid(bidList, 1, 'n');
+		assertFalse("Test that bid id is the same but confirm is different from COAS.addBid", test);
+		
+		//error
+		test = COAS.doDeleteBid(bidList, 1, 'N');
+		assertFalse("Test that bid id is the same but confirm is different from COAS.addBid", test);
+		
+		//Test that bidList size decreases by 1 if successful.
+		assertEquals("Check that Bids arraylist size is 0", 0, bidList.size());
+	}	
 			
 	// GY
 	@Test
@@ -266,6 +342,9 @@ public class COASTest {
 				
 				
 		// Qid
+		bid1 = null;
+		bid2 = null;
+		bidList = null;
 				
 				
 		// GY
