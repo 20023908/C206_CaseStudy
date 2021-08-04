@@ -158,7 +158,7 @@ public class COASTest {
 				assertNotNull("test if it is an invalid item name", itemList);
 				
 				//normal
-				assertSame("Test that item1 is added", item1, itemList.get(1));
+				assertSame("Test that item1 is added", item1, itemList.get(0));
 				assertSame("Test that item2 is added", item2, itemList.get(1));
 
 	}
@@ -175,19 +175,10 @@ public class COASTest {
 		assertTrue("test that item name matches with itemlist and cam be deleted",delete);
 		
 		//normal
+		COAS.additem(itemList, item1);
 		delete = COAS.doDeleteItem(itemList, "mobile phone",'Y');
-		assertTrue("test that item name matches with itemlist and cam be deleted",delete);
+		assertTrue("test that item name matches with itemlist and can be deleted",delete);
 	
-		//error
-		 delete = COAS.doDeleteItem(itemList, "mobile pphonee",'y');
-		assertTrue("test that item name does not match with item name in itemlist and cannot be deleted",delete);
-	
-		//error
-		 delete = COAS.doDeleteItem(itemList, "mobile pphonee",'Y');
-		assertTrue("test that item name does not match with item name in itemlist and cannot be deleted",delete);
-	
-		
-		
 	}
 			
 			
