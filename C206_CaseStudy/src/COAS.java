@@ -296,18 +296,18 @@ public class COAS {
 
 	public static boolean doDeleteItem(ArrayList<item> itemList, String itemName, char cfm) {
 
-		boolean isDeleted = false;
+	    boolean isDeleted = false;
+	//update delete
+	    for (item i : itemList) {
+	      if (itemName.contains(i.getItemName()) && (cfm == 'Y' || cfm == 'y')) {
+	        itemList.remove(i);
+	        isDeleted = true;
+	        break;
+	      }
+	    }
 
-		for (item i : itemList) {
-			if (itemName == i.getItemName() && (cfm == 'Y' || cfm == 'y')) {
-				itemList.remove(i);
-				isDeleted = true;
-				break;
-			}
-		}
-
-		return isDeleted;
-	}
+	    return isDeleted;
+	  }
 
 	public static void deleteItem(ArrayList<item> itemList) {
 		COAS.setHeader("Delete Item");
