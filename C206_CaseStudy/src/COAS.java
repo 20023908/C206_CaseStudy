@@ -50,7 +50,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh add method
-
+					COAS.addCategory(categoryList, category)
+						
 				} else if (type == 3) {
 					// nelly add method
 					item item1 = inputItem();
@@ -85,6 +86,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh view method
+					COAS.setHeader("VIEW ALL CATEGORIES");
+					COAS.viewAllCategories(categoryList);
 
 				} else if (type == 3) {
 					// nelly view method
