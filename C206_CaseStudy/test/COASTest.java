@@ -77,12 +77,12 @@ public class COASTest {
 		
 		assertNotNull("Check if there is valid account arraylist to add to", accountList);
 		
-		COAS.addUser(accountList, user1, user1.getEmail());
+		COAS.addUser(accountList, user1);
 		
 		assertEquals("Check that account arraylist size is 1", 1, accountList.size());
 		assertSame("Check that user1 is added", user1, accountList.get(0));
 		
-		COAS.addUser(accountList, user2, user2.getEmail());
+		COAS.addUser(accountList, user2);
 		assertEquals("Check that account arraylist size is 2", 2, accountList.size());
 		assertSame("Check that user2 is added", user2, accountList.get(1));
 	}
@@ -95,8 +95,8 @@ public class COASTest {
 		String testOutput = "";
 		assertEquals("Check that viewAllUsers", testOutput, user);
 		
-		COAS.addUser(accountList, user1, user1.getEmail());
-		COAS.addUser(accountList, user2, user2.getEmail());
+		COAS.addUser(accountList, user1);
+		COAS.addUser(accountList, user2);
 		assertEquals("Test that account arraylist size is 2", 2, accountList.size());
 		
 		user = COAS.retrieveUser(accountList);
@@ -111,7 +111,7 @@ public class COASTest {
 	public void doDeleteUserTest() {
 		assertNotNull("test if there is valid account arraylist to loan from", accountList);
 		
-		COAS.addUser(accountList, user1, user1.getEmail());
+		COAS.addUser(accountList, user1);
 
 		Boolean ok = COAS.doDeleteUser(accountList, "Justin@yahoo.com");
 		assertTrue("Test if an account is ok to delete?", ok);
@@ -119,7 +119,7 @@ public class COASTest {
 		ok = COAS.doDeleteUser(accountList, "Justin@yahoo.com");
 		assertFalse("Test if an same account is NOT ok to delete again?", ok);	
 
-		COAS.addUser(accountList, user2, user2.getEmail());	
+		COAS.addUser(accountList, user2);	
 		ok = COAS.doDeleteUser(accountList, "Jasmine@yahoo.com");
 		assertTrue("Test that second account ok to delete?", ok);
 		//error condition

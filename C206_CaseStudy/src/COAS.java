@@ -46,8 +46,7 @@ public class COAS {
 				if (type == 1) {
 					// dan add method
 					account user = inputUser();
-					String email = user.getEmail();
-					COAS.addUser(accountList, user, email);
+					COAS.addUser(accountList, user);
 
 				} else if (type == 2) {
 					// jh add method
@@ -183,19 +182,14 @@ public class COAS {
 		return user1;
 	}
 
-	public static void addUser(ArrayList<account> accountList, account user1, String email) {
+	public static void addUser(ArrayList<account> accountList, account user1) {
 
-		for (account a : accountList) {
-			email = a.getEmail();
-		}
-		if (!user1.getEmail().equalsIgnoreCase(email) && user1.getPassword().length() > 8) {
+		if (user1.getPassword().length() > 8) {
 			accountList.add(user1);
 			System.out.println(user1.getRole() + " account added");
 
 		}
-		if (user1.getEmail().equalsIgnoreCase(email)) {
-			System.out.println(user1.getRole() + " account with email: " + user1.getEmail() + " already exist!");
-		}
+
 		if (user1.getPassword().length() < 8) {
 			System.out.println("Password must be more than 8 characters long!");
 		}
