@@ -50,7 +50,9 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh add method
-
+					Category category1 = inputCategory();
+					COAS.addCategory(categoryList, category1)
+						
 				} else if (type == 3) {
 					// nelly add method
 					item item1 = inputItem();
@@ -85,6 +87,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh view method
+					COAS.setHeader("VIEW ALL CATEGORIES");
+					COAS.viewAllCategories(categoryList);
 
 				} else if (type == 3) {
 					// nelly view method
@@ -118,7 +122,8 @@ public class COAS {
 
 				} else if (type == 2) {
 					// jh delete method
-
+					deleteCategory(categoryList);
+					
 				} else if (type == 3) {
 					// nelly delete method
 					deleteItem(itemList);
@@ -247,7 +252,47 @@ public class COAS {
 	}
 
 	// (2) jh category
+	  public static Category inputCategory() {
+		  String categoryName = Helper.readString("Enter Category Name > ");
+		  Category category1 = new Category(categoryName);
+		  return category1;
+	  }
+	
+	public static void viewAllCategory(ArrayList<Category> categoryList) {
+		COAS.setHeader("CATEGORY LIST");
+		  String output = String.format("%s\n", "NAME");
+		  for (int i = 0; i < categoryList.size(); i++) {
+			  output += String.format("%s \n", categoryList.get(i).toString()); }
+		System.out.println(output);
+  }
+	
+	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
+		boolean isFound = false;
+		for(int i = 0; i < categoryList.size(); i++) {
+			String categoryName = categoryList.get(i).getName();
+			if(deleteName.equalsIgnoreCase(categoryName)) {
+				categoryList.remove(i);
+				isFound = true; }
+		}
+    return isFound;
+  }
+ 
+	  public static void deleteCategory(ArrayList<Category> categoryList) {
+		  COAS.viewAllCategory(categoryList);
+		  String deleteCategory = Helper.readString("Enter the item name to delete > ");
+		  boolean isFound = doDeleteCategory(categoryList, deleteCategory);
+		  if(isFound == true ) {
+			  char toDelete = Helper.readChar("Are you sure you want to delete this category? (Y/N) > ");
+			  if (toDelete == 'Y' | toDelete == 'y') {
+				  System.out.println("Category deleted"); }
+			  else {
+				  System.out.println("Category deleting failed!"); }
+    } else {
+      System.out.println("Category does not exist!");
+    }
 
+  }
+	
 	// (3) nelly item
 	public static item inputItem() {
 		COAS.setHeader("Add New Item");
